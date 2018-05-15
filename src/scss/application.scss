@@ -1,0 +1,37 @@
+body {
+  color: #005CC5;
+  text-align: center;
+  margin: 0px;
+}
+
+.main {
+  &__container {
+    background-color: rgba(0,255,255,0.7);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.navbar {
+  &__container {
+    background-color: rgba(255,0,255,0.7);
+    height: 50px;
+    width: 100%;
+  }
+  &__icon {
+    height: 100%;
+    width: 50px;
+    float: left;
+    background-color: white;
+  }
+  &__options-container {
+    height: 100%;
+    float: right;
+    display: inline-flex;
+  }
+  &__option {
+    height: 100%;
+    width: 50px;
+    background-color: white;
+  }
+}
