@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch-server": "nodemon server/index.js",
-    "start": "node server/index.js",
+    "server": "node server/index.js",
     "webpack": "./node_modules/.bin/webpack -w",
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "watch": "bash scripts/watch.sh"
