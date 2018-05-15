@@ -1,37 +1,100 @@
 body {
-  color: #005CC5;
   text-align: center;
   margin: 0px;
 }
 
 .main {
   &__container {
-    background-color: rgba(0,255,255,0.7);
     height: 100%;
     width: 100%;
+    overflow: hidden;
+    &--grey {
+      background-color: #E9ECF7;
+    }
+    &--yellow {
+      background-color: #EFF3CA;
+    }
   }
 }
 
-.navbar {
+.component {
   &__container {
-    background-color: rgba(255,0,255,0.7);
-    height: 50px;
+    // margin-top: 5%;
+    height: 100%;
+    // background-color: white;
+    width: 30%;
+    display: inline-block;
+  }
+  &__image {
+    display: inline-block;
+    height: 100px;
+  }
+  &__logo {
+    display: inline-block;
+    height: 100%;
+  }
+}
+
+.login {
+  text-align: center;
+  font-family: moon;
+  &__text {
+    font-size: 38.77pt;
+    color: #231F20;
+  }
+  &__input {
+    // height: 56px;
+    height: 7%;
     width: 100%;
+    border: solid 0.5px #231F20;
+    border-radius: 25px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    font-family: moon;
+    font-size: 20.8pt;
+    &--small {
+      width: 49%;
+    }
+    &--left {
+      float: left;
+    }
+    &--right {
+      float: right;
+    }
   }
-  &__icon {
-    height: 100%;
-    width: 50px;
-    float: left;
-    background-color: white;
+  &__input::placeholder {
+    color: #D1D3D4;
+    font-family: moon;
+    // font-size: 20.8pt;
+    font-size: 100%;
   }
-  &__options-container {
-    height: 100%;
-    float: right;
-    display: inline-flex;
+  &__button {
+    height: 56px;
+    width: 145px;
+    border: none;
+    border-radius: 33px;
+    background: #662D91;
+    &--text {
+      font-family: moon;
+      font-size: 20.8pt;
+      color: white;
+    }
   }
-  &__option {
-    height: 100%;
-    width: 50px;
-    background-color: white;
+  &__bottom-text {
+    color: #414042;
+    // font-family: Lato Regular;
+    white-space: nowrap;
+    font-size: 6pt;
+    margin-top: 20px;
   }
+  &__bottom-text a {
+    color: #662D91;
+    cursor: pointer;
+  }
+}
+
+@font-face {
+  font-family: moon;
+  src: url("../assets/MoonBold.otf") format("opentype");
 }
