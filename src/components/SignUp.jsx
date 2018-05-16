@@ -1,12 +1,14 @@
 import React from 'react';
 import InputBox from './InputBox.jsx';
+import GetStarted from './GetStarted.jsx';
+import arrow from'../assets/arrow.png';
 
 class SignUp extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      stage: 1,
+      stage: 4,
       firstName: null,
       lastName: null,
       email: null,
@@ -45,10 +47,11 @@ class SignUp extends React.Component {
       this.validateSignUpPart1();
     } else if(this.state.stage === 2) {
       this.validateSignUpPart2();
-    } else if(this.state.stage === 3) {
-      console.log('display new page');
+      this.props.toggleMainBackground('grey');
     }
-    this.setState({stage: this.state.stage+1});
+    if(this.state.stage !== 4) {
+      this.setState({stage: this.state.stage+1});
+    }
   }
 
   handleClickhere = () => {
@@ -93,7 +96,7 @@ class SignUp extends React.Component {
       );
     }
     return(
-      <div>
+      <div className="login__steps">
         <svg height="10" width="20">
           {renderCircle(true)}
         </svg>
@@ -107,22 +110,43 @@ class SignUp extends React.Component {
     );
   }
 
+  handleBackPress = () => {
+    this.setState({stage: this.state.stage-1});
+  }
+
   render() {
-    console.log(this.state);
-    
+    let {stage} = this.state;
+    console.log(stage);
     return (
       <div className="login">
-        <h1 className="login__text">SignUp</h1>
-        {this.state.stage === 1 ? this.renderStageOne() : this.renderStageTwo()}
+        <h1 className="login__text">{(stage !== 3 && stage !== 4) ? "Sign Up" : `Hi ${this.state.firstName}`}</h1>
+        {this.state.stage === 1 ? 
+          this.renderStageOne() 
+        : this.state.stage === 2 ? 
+          this.renderStageTwo()
+        :
+          <GetStarted stage={stage}/>
+        }
         
-        {this.renderSteps()}
-        
-        <br/><br/>
+        {stage !== 4 ? this.renderSteps() : null}
 
-        <button className="login__button">
-          <div className="login__button--text" onClick={this.handleNext}>Next</div>
-        </button>
-        <p className="login__bottom-text">If you have an account, please <a onClick={this.handleClickhere}>click here</a> to Log in</p>
+        {stage !== 4 ?
+          <button className="login__button">
+            <div className="login__button--text" onClick={this.handleNext}>Next</div>
+          </button>
+        :
+          <div className="login__start-button-container">
+            <div className="login__start-button-inner">
+              <img src={arrow} className="login__arrow" height="42" width="42" onClick={this.handleBackPress}/>
+              <button className="login__button login__button--start">
+                <div className="login__button--text" onClick={this.handleNext}>Get Started</div>
+              </button>
+            </div>
+          </div>
+        }
+        {stage !== 4 ? 
+          <p className="login__bottom-text">If you have an account, please <a onClick={this.handleClickhere}>click here</a> to Log in</p>
+        : null}
       </div>
     );
   }

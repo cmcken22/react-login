@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: true
+      login: !true,
+      background: 'grey'
     }
   }
 
@@ -17,11 +18,15 @@ class App extends React.Component {
     this.setState({login: value});
   }
 
+  toggleMainBackground = (value) => {
+    this.setState({background: value});
+  }
+
   render() {
     return (
       <div className={cx("main__container", {
-        "main__container--grey": this.state.login,
-        "main__container--yellow": !this.state.login,
+        "main__container--grey": this.state.login || this.state.background === 'grey',
+        "main__container--yellow": !this.state.login && this.state.background !== 'grey',
       })}>
         <div className="component__container">
           <div className="component__image">
@@ -30,7 +35,10 @@ class App extends React.Component {
           {this.state.login ?
             <Login toggleLogin={this.toggleLogin}/>
           :
-            <SignUp toggleLogin={this.toggleLogin}/>
+            <SignUp 
+              toggleLogin={this.toggleLogin}
+              toggleMainBackground={this.toggleMainBackground}
+            />
           }
         </div>
       </div>
