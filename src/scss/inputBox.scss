@@ -1,0 +1,38 @@
+.inputbox {
+  &__container {
+    height: 7%;
+    width:100%;
+    border: solid 0.5px #231F20;
+    border-radius: 25px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+  }
+  &__inner {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 100%;
+    // background-color: $pink;
+  }
+  
+  &__input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: moonBold;
+    font-size: 20.8pt;
+  }
+  &__input::placeholder {
+    color: #D1D3D4;
+    font-family: moonBold;
+    font-size: 100%;
+  }
+  &__input:focus{
+    outline: none;
+  }
+
+  &__dropdown {
+    position: absolute;
+  }
+}

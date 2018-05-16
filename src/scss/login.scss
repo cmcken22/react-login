@@ -1,0 +1,68 @@
+.login {
+  text-align: center;
+  font-family: moonBold;
+  &__text {
+    font-size: 38.77pt;
+    color: #231F20;
+  }
+  &__input {
+    // height: 56px;
+    height: 7%;
+    width: 100%;
+    border: solid 0.5px #231F20;
+    border-radius: 25px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    font-family: moonBold;
+    font-size: 20.8pt;
+    &--small {
+      width: 49%;
+    }
+    &--left {
+      float: left;
+    }
+    &--right {
+      float: right;
+    }
+  }
+  &__input::placeholder {
+    color: #D1D3D4;
+    font-family: moonBold;
+    font-size: 100%;
+  }
+  &__input:focus{
+    outline: none;
+  }
+  &__button {
+    height: 56px;
+    width: 145px;
+    border: none;
+    border-radius: 33px;
+    background: $purple;
+    &--text {
+      font-family: moonBold;
+      font-size: 20.8pt;
+      color: white;
+    }
+  }
+  &__button:hover {
+    border: solid 0.5px $purple;
+    border-radius: 33px;
+    background: white;
+  }
+  &__button:hover > .login__button--text {
+    color: $purple;
+  }
+  &__bottom-text {
+    color: #414042;
+    // font-family: Lato Regular;
+    white-space: nowrap;
+    font-size: 6pt;
+    margin-top: 20px;
+  }
+  &__bottom-text a {
+    color: $purple;
+    cursor: pointer;
+  }
+}
