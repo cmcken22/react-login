@@ -1,3 +1,17 @@
+$purple: #662D91;
+$pink: rgba(255,0,255,0.7);
+$blue: rgba(0,255,255,0.7);
+
+@font-face {
+  font-family: moonBold;
+  src: url("../assets/MoonBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: moonLight;
+  src: url("../assets/MoonLight.otf") format("opentype");
+}
+
 body {
   text-align: center;
   margin: 0px;
@@ -37,7 +51,7 @@ body {
 
 .login {
   text-align: center;
-  font-family: moon;
+  font-family: moonBold;
   &__text {
     font-size: 38.77pt;
     color: #231F20;
@@ -51,7 +65,7 @@ body {
     background: #FFFFFF;
     margin-bottom: 20px;
     padding-left: 20px;
-    font-family: moon;
+    font-family: moonBold;
     font-size: 20.8pt;
     &--small {
       width: 49%;
@@ -65,21 +79,31 @@ body {
   }
   &__input::placeholder {
     color: #D1D3D4;
-    font-family: moon;
-    // font-size: 20.8pt;
+    font-family: moonBold;
     font-size: 100%;
+  }
+  &__input:focus{
+    outline: none;
   }
   &__button {
     height: 56px;
     width: 145px;
     border: none;
     border-radius: 33px;
-    background: #662D91;
+    background: $purple;
     &--text {
-      font-family: moon;
+      font-family: moonBold;
       font-size: 20.8pt;
       color: white;
     }
+  }
+  &__button:hover {
+    border: solid 0.5px $purple;
+    border-radius: 33px;
+    background: white;
+  }
+  &__button:hover > .login__button--text {
+    color: $purple;
   }
   &__bottom-text {
     color: #414042;
@@ -89,12 +113,99 @@ body {
     margin-top: 20px;
   }
   &__bottom-text a {
-    color: #662D91;
+    color: $purple;
     cursor: pointer;
   }
 }
 
-@font-face {
-  font-family: moon;
-  src: url("../assets/MoonBold.otf") format("opentype");
+.inputbox {
+  &__container {
+    height: 7%;
+    width:100%;
+    border: solid 0.5px #231F20;
+    border-radius: 25px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+  }
+  &__inner {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 100%;
+    // background-color: $pink;
+  }
+  
+  &__input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: moonBold;
+    font-size: 20.8pt;
+  }
+  &__input::placeholder {
+    color: #D1D3D4;
+    font-family: moonBold;
+    font-size: 100%;
+  }
+  &__input:focus{
+    outline: none;
+  }
+
+  &__dropdown {
+    position: absolute;
+  }
+}
+
+.dropdown {
+  &__container {
+    background: white;
+    height: 100px;
+    width: 197px;
+    border: solid 0.5px #231F20;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  &__header {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    height: 30%;
+    width: 100%;
+    border-bottom: solid 0.5px #231F20;
+    background: #E9ECF7;
+    &--text {
+      font-family: 'Lato', sans-serif;
+      color: #58595B;
+      padding: 10px;
+      margin: 0px;
+    }
+  }
+  &__list {
+    font-family: moonLight;
+    height: 70%;
+    width: 100%;
+    overflow: auto;
+    &--active {
+      color: $purple;
+      list-style-type: disc;
+    }
+    &--text {
+      font-family: 'Lato', sans-serif;
+      color: #939598;
+      margin: 0px;
+    }
+  }
+  &__list ul {
+    cursor: pointer;
+    margin: 0;
+    text-align: left;
+    padding-top: 3px;
+    padding-left: 25px;
+    list-style-type: circle;
+  }
+  &__list li:hover {
+    color: $purple;
+    list-style-type: disc;
+  }
 }

@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: true
+      login: !true,
+      loginSuccess: false
     }
   }
 
@@ -29,6 +30,8 @@ class App extends React.Component {
           </div>
           {this.state.login ?
             <Login toggleLogin={this.toggleLogin}/>
+          : this.state.loginSuccess ? 
+            <SignUp toggleLogin={this.toggleLogin}/>
           :
             <SignUp toggleLogin={this.toggleLogin}/>
           }

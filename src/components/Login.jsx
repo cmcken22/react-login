@@ -24,7 +24,7 @@ class Login extends React.Component {
         <input className="login__input" placeholder="username" ref={r => this.userName = r}/><br/>
         <input className="login__input" placeholder="password" ref={r => this.password = r}/><br/>
         <button className="login__button">
-          <div className="Login__button--text" onClick={this.handleSubmit}>Enter</div>
+          <div className="login__button--text" onClick={this.handleSubmit}>Enter</div>
         </button>
         <p className="login__bottom-text">If you are new to Gate Three, please <a onClick={this.handleClickhere}>click here</a> to sign up</p>
       </div>
