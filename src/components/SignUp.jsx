@@ -8,7 +8,7 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: 4,
+      stage: 1,
       firstName: null,
       lastName: null,
       email: null,
@@ -21,7 +21,6 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log('enter', this.userName.value, this.password.value);
   }
 
   validateSignUpPart1 = () => {

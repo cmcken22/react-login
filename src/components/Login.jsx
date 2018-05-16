@@ -9,7 +9,6 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log('enter', this.userName.value, this.password.value);
     this.props.toggleLogin(false);
   }
 
