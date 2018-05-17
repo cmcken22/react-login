@@ -37,6 +37,19 @@
       margin: 0px;
     }
   }
+
+  &__list::-webkit-scrollbar {
+    width: 5px;
+  }
+  &__list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+  &__list::-webkit-scrollbar-thumb {
+    background: #414042; 
+    border-radius: 10px;
+  }
+
   &__list ul {
     cursor: pointer;
     margin: 0;
