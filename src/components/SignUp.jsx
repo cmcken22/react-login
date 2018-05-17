@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import InputBox from './InputBox.jsx';
 import GetStarted from './GetStarted.jsx';
 import arrow from'../assets/arrow.png';
@@ -144,7 +145,7 @@ class SignUp extends React.Component {
           </div>
         }
         {stage !== 4 ? 
-          <p className="login__bottom-text">If you have an account, please <a className="login__bottom-text--hyperlink" onClick={this.handleClickhere}>click here</a> to Log in</p>
+          <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
         : null}
       </div>
     );

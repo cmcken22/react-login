@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
   
@@ -25,7 +26,7 @@ class Login extends React.Component {
         <button className="login__button">
           <div className="login__button--text" onClick={this.handleSubmit}>Enter</div>
         </button>
-        <p className="login__bottom-text">If you are new to Gate Three, please <a className="login__bottom-text--hyperlink" onClick={this.handleClickhere}>click here</a> to sign up</p>
+        <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
       </div>
     );
   }
