@@ -1,9 +1,9 @@
 .dropdown {
   &__container {
     background: white;
-    height: 100px;
-    width: 197px;
-    border: solid 0.5px #231F20;
+    height: 130px;
+    width: 190px;
+    border: $black-border;
     border-radius: 15px;
     overflow: hidden;
   }
@@ -13,7 +13,7 @@
     white-space: nowrap;
     height: 30%;
     width: 100%;
-    border-bottom: solid 0.5px #231F20;
+    border-bottom: $black-border;
     background: #E9ECF7;
     &--text {
       font-family: 'Lato', sans-serif;

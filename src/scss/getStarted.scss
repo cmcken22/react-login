@@ -1,28 +1,33 @@
 .getstarted {
   &__container {
     width: 100%;
+    margin-bottom: 25px;
     // background-color: $blue;
-    margin-bottom: 20px;
   }
   &__text {
     font-family: 'Lato', sans-serif;
     color: #414042;
+    padding: 0 25px;
+    margin-bottom: 25px;
     // font-size: 21pt;
   }
   &__buttons {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   &__button {
-    width: 50%;
-    border: solid 0.5px black;
+    width: 48%;
+    border: $black-border;
     border-radius: 15px;
-    height: 45px;
+    height: 47px;
     font-family: moonBold;
     &--left {
-    //  float: left;
-     background: white;
+      margin-right: 4%;
+      // position: relative;
+      // float: left;
+      background: white;
     }
     &--right {
+      // position: relative;
       // float: right; 
       background: black;
       color: white;

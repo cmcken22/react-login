@@ -115,7 +115,7 @@ class SignUp extends React.Component {
 
   render() {
     let {stage} = this.state;
-    console.log(stage);
+
     return (
       <div className="login">
         <h1 className="login__text">{(stage !== 3 && stage !== 4) ? "Sign Up" : `Hi ${this.state.firstName}`}</h1>
@@ -144,7 +144,7 @@ class SignUp extends React.Component {
           </div>
         }
         {stage !== 4 ? 
-          <p className="login__bottom-text">If you have an account, please <a onClick={this.handleClickhere}>click here</a> to Log in</p>
+          <p className="login__bottom-text">If you have an account, please <a className="login__bottom-text--hyperlink" onClick={this.handleClickhere}>click here</a> to Log in</p>
         : null}
       </div>
     );

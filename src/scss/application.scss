@@ -7,11 +7,6 @@ $blue: rgba(0,255,255,0.7);
   src: url("../assets/MoonBold.otf") format("opentype");
 }
 
-@font-face {
-  font-family: moonLight;
-  src: url("../assets/MoonLight.otf") format("opentype");
-}
-
 body {
   text-align: center;
   margin: 0px;
@@ -21,7 +16,8 @@ body {
   &__container {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    display: table;
+    // overflow: hidden;
     &--grey {
       background-color: #E9ECF7;
     }
@@ -33,10 +29,9 @@ body {
 
 .component {
   &__container {
-    // margin-top: 5%;
     height: 100%;
-    // background-color: white;
     width: 30%;
+    padding-top: 45px;
     display: inline-block;
   }
   &__image {

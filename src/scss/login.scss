@@ -1,3 +1,6 @@
+$black-border: solid 1px #231F20;
+$font-size: 13pt;
+
 .login {
   text-align: center;
   font-family: moonBold;
@@ -6,16 +9,15 @@
     color: #231F20;
   }
   &__input {
-    // height: 56px;
-    height: 7%;
+    height: 47px;
     width: 100%;
-    border: solid 0.5px #231F20;
-    border-radius: 25px;
+    border: $black-border;
+    border-radius: 20px;
     background: #FFFFFF;
     margin-bottom: 20px;
     padding-left: 20px;
     font-family: moonBold;
-    font-size: 20.8pt;
+    font-size: $font-size;
     &--small {
       width: 49%;
     }
@@ -51,8 +53,8 @@
     outline: none;
   }
   &__button {
-    height: 56px;
-    width: 145px;
+    height: 47px;
+    width: 100px;
     border: none;
     border-radius: 33px;
     background: $purple;
@@ -61,12 +63,12 @@
     }
     &--text {
       font-family: moonBold;
-      font-size: 20.8pt;
+      font-size: $font-size;
       color: white;
     }
   }
   &__button:hover {
-    border: solid 0.5px $purple;
+    border: solid 1px $purple;
     border-radius: 33px;
     background: white;
   }
@@ -79,6 +81,10 @@
     white-space: nowrap;
     font-size: 8pt;
     margin-top: 20px;
+    &--hyperlink {
+      font-weight: bold;
+      font-style: italic;
+    }
   }
   &__bottom-text a {
     color: $purple;

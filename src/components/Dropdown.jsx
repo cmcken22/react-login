@@ -9,7 +9,7 @@ class Dropdown extends React.Component {
       activeElement: null
     }
   }
-
+  
   handleClick = (item) => {
     this.setState({activeElement: item});
     this.props.onSelect(item);

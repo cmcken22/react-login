@@ -10,12 +10,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       login: true,
-      background: 'grey'
+      background: null
     }
   }
 
   toggleLogin = (value) => {
-    this.setState({login: value});
+    if(!value) {
+      this.setState({login: value, background: null});
+    } else {
+      this.setState({login: value});
+    }
   }
 
   toggleMainBackground = (value) => {

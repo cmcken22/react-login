@@ -26,6 +26,11 @@ class InputBox extends React.Component {
   }
 
   componentDidMount() {
+    this.caclDropdownPos();
+    window.addEventListener("resize", (e) => this.caclDropdownPos());
+  }
+
+  caclDropdownPos = () => {
     let {x, y, width} = this.containerRef.getBoundingClientRect();
     this.setState({
       dropdownPos: {top: y, left: x + width + 5}
