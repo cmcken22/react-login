@@ -1,50 +1,27 @@
 import React from 'react';
 import cx from 'classnames';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
-import mainLogo from'../assets/gateThreeLogo.png';
 
 class App extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      login: true,
-      background: null
     }
-  }
-
-  toggleLogin = (value) => {
-    if(!value) {
-      this.setState({login: value, background: null});
-    } else {
-      this.setState({login: value});
-    }
-  }
-
-  toggleMainBackground = (value) => {
-    this.setState({background: value});
   }
 
   render() {
     return (
       <Router>
-        <div className={cx("main__container", {
-          "main__container--grey": this.state.login || this.state.background === 'grey',
-          "main__container--yellow": !this.state.login && this.state.background !== 'grey',
-        })}>
-          {/* <div className="component__container">
-            <div className="component__image">
-              <img className="component__logo" src={mainLogo}/>
-            </div> */}
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route path="/Login" component={Login} />
-              <Route path="/SignUp" component={SignUp} />
-              <Route component={NotFound} />
-            </Switch>
-          {/* </div> */}
+        <div className="main__container">
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route path="/Login" component={Login} />
+            <Route path="/SignUp" component={SignUp} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );

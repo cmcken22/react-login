@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import cx from 'classnames';
 import InputBox from './InputBox.jsx';
-import GetStarted from './GetStarted.jsx';
 import arrow from'../assets/arrow.png';
 import mainLogo from'../assets/gateThreeLogo.png';
 import Container from'./Container.jsx';
