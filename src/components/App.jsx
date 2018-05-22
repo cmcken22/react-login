@@ -34,27 +34,17 @@ class App extends React.Component {
           "main__container--grey": this.state.login || this.state.background === 'grey',
           "main__container--yellow": !this.state.login && this.state.background !== 'grey',
         })}>
-          <div className="component__container">
+          {/* <div className="component__container">
             <div className="component__image">
               <img className="component__logo" src={mainLogo}/>
-            </div>
+            </div> */}
             <Switch>
               <Route exact path="/" component={Login} />
               <Route path="/Login" component={Login} />
               <Route path="/SignUp" component={SignUp} />
               <Route component={NotFound} />
             </Switch>
-
-            {/* {this.state.login ?
-              <Login toggleLogin={this.toggleLogin}/>
-            :
-              <SignUp 
-                toggleLogin={this.toggleLogin}
-                toggleMainBackground={this.toggleMainBackground}
-              />
-            } */}
-
-          </div>
+          {/* </div> */}
         </div>
       </Router>
     );

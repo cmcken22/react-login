@@ -12,33 +12,22 @@ body {
   margin: 0px;
 }
 
-.main {
+.container {
+  height: 100%;
+  width: 100%;
+  background: #E9ECF7;
+  font-family: moonBold;
+  display: table;
   &__container {
+    margin: 0 auto; 
     height: 100%;
-    width: 100%;
-    display: table;
-    &--grey {
-      background-color: #E9ECF7;
-    }
-    &--yellow {
-      background-color: #EFF3CA;
-    }
-  }
-}
-
-.component {
-  &__container {
-    height: 100%;
-    width: 30%;
-    padding-top: 45px;
-    display: inline-block;
+    width: 33%;
+    padding-top: 55px;
   }
   &__image {
-    display: inline-block;
     height: 100px;
   }
   &__logo {
-    display: inline-block;
     height: 100%;
   }
 }

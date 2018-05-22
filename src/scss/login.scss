@@ -2,8 +2,18 @@ $black-border: solid 1px #231F20;
 $font-size: 13pt;
 
 .login {
-  text-align: center;
-  font-family: moonBold;
+  // height: 100%;
+  // width: 100%;
+  // background: #E9ECF7;
+  // font-family: moonBold;
+  // display: table;
+  &__container {
+    background: #E9ECF7;
+    // margin: 0 auto; 
+    // height: 100%;
+    // width: 33%;
+    // padding-top: 55px;
+  }
   &__text {
     font-size: 38.77pt;
     color: #231F20;
@@ -36,6 +46,7 @@ $font-size: 13pt;
   &__input:focus{
     outline: none;
   }
+
   &__arrow {
     margin-right: 35px;
     cursor: pointer;
@@ -49,6 +60,7 @@ $font-size: 13pt;
     display: inline-flex;
     align-items: center;
   }
+  
   &__button:focus{
     outline: none;
   }
@@ -89,8 +101,5 @@ $font-size: 13pt;
   &__bottom-text a {
     color: $purple;
     cursor: pointer;
-  }
-  &__steps {
-    margin-bottom: 20px;
   }
 }

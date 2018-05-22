@@ -1,0 +1,13 @@
+.signup {
+  &__container {
+    &--yellow {
+      background: #EFF3CA;
+    }
+    &--grey {
+      background: #E9ECF7;
+    }
+  }
+  &__steps {
+    margin-bottom: 20px;
+  }
+}

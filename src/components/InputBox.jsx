@@ -31,7 +31,7 @@ class InputBox extends React.Component {
   }
 
   caclDropdownPos = () => {
-    let {x, y, width} = this.containerRef.getBoundingClientRect();
+    let {x, y, width} = this.containerRef.getBoundingClientRect() ? this.containerRef.getBoundingClientRect() : 0;
     this.setState({
       dropdownPos: {top: y, left: x + width + 5}
     });
