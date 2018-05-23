@@ -1,28 +1,19 @@
-$black-border: solid 1px #231F20;
-$font-size: 13pt;
-
 .login {
-  // height: 100%;
-  // width: 100%;
-  // background: #E9ECF7;
-  // font-family: moonBold;
-  // display: table;
-  &__container {
-    background: #E9ECF7;
-    // margin: 0 auto; 
-    // height: 100%;
-    // width: 33%;
-    // padding-top: 55px;
-  }
+  font-family: moonBold;
+  position: relative;
+  z-index: 1;
+  // background-color: $blue;
   &__text {
     font-size: 38.77pt;
-    color: #231F20;
+    color: white;
   }
+
   &__input {
     height: 47px;
     width: 100%;
-    border: $black-border;
+    border: none;
     border-radius: 20px;
+    box-shadow: 0px 3px #42a5a5;
     background: #FFFFFF;
     margin-bottom: 20px;
     padding-left: 20px;
@@ -47,20 +38,6 @@ $font-size: 13pt;
     outline: none;
   }
 
-  &__arrow {
-    margin-right: 35px;
-    cursor: pointer;
-  }
-  &__start-button-container {
-    width: 100%;
-  }
-  &__start-button-inner {
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-flex;
-    align-items: center;
-  }
-  
   &__button:focus{
     outline: none;
   }
@@ -69,7 +46,9 @@ $font-size: 13pt;
     width: 100px;
     border: none;
     border-radius: 33px;
-    background: $purple;
+    box-shadow: 0px 3px $orange-shadow;
+    background: $orange;
+    cursor: pointer;
     &--start {
       width: 210px;
     }
@@ -80,15 +59,16 @@ $font-size: 13pt;
     }
   }
   &__button:hover {
-    border: solid 1px $purple;
+    border: solid 1px $orange-shadow;
     border-radius: 33px;
     background: white;
   }
   &__button:hover > .login__button--text {
-    color: $purple;
+    color: $orange-shadow;
   }
+
   &__bottom-text {
-    color: #414042;
+    color: white;
     font-family: 'Lato', sans-serif;
     white-space: nowrap;
     font-size: 8pt;
@@ -99,7 +79,112 @@ $font-size: 13pt;
     }
   }
   &__bottom-text a {
-    color: $purple;
+    color: $orange-shadow;
+    text-decoration: none;
     cursor: pointer;
   }
+
 }
+
+// .login {
+//   // height: 100%;
+//   // width: 100%;
+//   // background: #E9ECF7;
+//   // font-family: moonBold;
+//   // display: table;
+//   &__container {
+//     // background: #E9ECF7;
+//     // margin: 0 auto; 
+//     // height: 100%;
+//     // width: 33%;
+//     // padding-top: 55px;
+//   }
+//   &__text {
+//     font-size: 38.77pt;
+//     color: #231F20;
+//   }
+//   &__input {
+//     height: 47px;
+//     width: 100%;
+//     border: $black-border;
+//     border-radius: 20px;
+//     background: #FFFFFF;
+//     margin-bottom: 20px;
+//     padding-left: 20px;
+//     font-family: moonBold;
+//     font-size: $font-size;
+//     &--small {
+//       width: 49%;
+//     }
+//     &--left {
+//       float: left;
+//     }
+//     &--right {
+//       float: right;
+//     }
+//   }
+//   &__input::placeholder {
+//     color: #D1D3D4;
+//     font-family: moonBold;
+//     font-size: 100%;
+//   }
+//   &__input:focus{
+//     outline: none;
+//   }
+
+//   &__arrow {
+//     margin-right: 35px;
+//     cursor: pointer;
+//   }
+//   &__start-button-container {
+//     width: 100%;
+//   }
+//   &__start-button-inner {
+//     margin-left: auto;
+//     margin-right: auto;
+//     display: inline-flex;
+//     align-items: center;
+//   }
+  
+//   &__button:focus{
+//     outline: none;
+//   }
+//   &__button {
+//     height: 47px;
+//     width: 100px;
+//     border: none;
+//     border-radius: 33px;
+//     background: $purple;
+//     &--start {
+//       width: 210px;
+//     }
+//     &--text {
+//       font-family: moonBold;
+//       font-size: $font-size;
+//       color: white;
+//     }
+//   }
+//   &__button:hover {
+//     border: solid 1px $purple;
+//     border-radius: 33px;
+//     background: white;
+//   }
+//   &__button:hover > .login__button--text {
+//     color: $purple;
+//   }
+//   &__bottom-text {
+//     color: #414042;
+//     font-family: 'Lato', sans-serif;
+//     white-space: nowrap;
+//     font-size: 8pt;
+//     margin-top: 20px;
+//     &--hyperlink {
+//       font-weight: bold;
+//       font-style: italic;
+//     }
+//   }
+//   &__bottom-text a {
+//     color: $purple;
+//     cursor: pointer;
+//   }
+// }

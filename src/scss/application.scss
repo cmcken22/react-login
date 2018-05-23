@@ -1,6 +1,13 @@
+$black-border: solid 1px #231F20;
+$font-size: 13pt;
 $purple: #662D91;
+$orange: #F9A87A;
+$orange-shadow: #F26722;
+$background-toronto: #7CCED0;
+
 $pink: rgba(255,0,255,0.7);
 $blue: rgba(0,255,255,0.7);
+$white: rgba(255,255,255,0.7);
 
 @font-face {
   font-family: moonBold;
@@ -12,22 +19,84 @@ body {
   margin: 0px;
 }
 
-.container {
+.main {
   height: 100%;
   width: 100%;
-  background: #E9ECF7;
-  font-family: moonBold;
-  display: table;
-  &__container {
-    margin: 0 auto; 
+  // background-color: $white;
+  
+  &__backdrop {
     height: 100%;
-    width: 33%;
-    padding-top: 55px;
+    width: 100%;
+    position: relative;
+    &--toronto {
+      background-image: url("../assets/Skyline-06.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-color: $background-toronto;
+    }
+    &--vancouver {
+      background-image: url("../assets/Skyline-06.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-color: $pink;
+    }  
   }
-  &__image {
-    height: 100px;
-  }
-  &__logo {
+
+  &__content {
     height: 100%;
+    width: 100%;
+    // background-color: $blue;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.toronto {
+  &__clouds {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    text-align: initial;
+    overflow: hidden;
+    // background: $pink;
+  }
+  &__cloud {
+    display: inline-block;
+    color: white;
+    position: relative;
+    margin: 0 0 10px 0;  
+    background-repeat: no-repeat;
+    background-size: contain;
+    &--1 {
+      background-image: url('../assets/clouds/SmallSingleCloud-06.png');
+      top: 80px;
+      width: 215px;
+      height: 119px;
+      animation: move-cloud 60s infinite;
+    }
+    &--2 {
+      background-image: url('../assets/clouds/DoubleCloud-05.png');
+      top: 72px;
+      width: 241px;
+      height: 157px;
+      animation: move-cloud 120s infinite;
+    }
+    &--3 {
+      background-image: url('../assets/clouds/BigSingleCloud-07.png');
+      top: 30px;
+      width: 194px;
+      height: 107px;
+      animation: move-cloud 30s infinite;
+    }
+  } 
+}
+
+@keyframes move-cloud {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
   }
 }

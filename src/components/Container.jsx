@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import cx from 'classnames';
-import mainLogo from'../assets/gateThreeLogo.png';
+import mainLogo from'../assets/gateThreeLogo-white.png';
 
 class Container extends React.Component {
   
@@ -16,12 +16,12 @@ class Container extends React.Component {
     return (
       <div className={cx("container", {
         [className]: className
-        })}>
-        <div className="container__container">
+      })}>
+        <div className="container__inner">
           <div className="container__image">
             <img className="container__logo" src={mainLogo}/>
           </div>
-          {this.props.children}
+          {children}
         </div>
       </div>
     );

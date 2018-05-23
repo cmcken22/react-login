@@ -1,0 +1,21 @@
+.container {
+  height: 100%;
+  width: 60%;
+  // background: $pink;
+
+  &__inner {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    // background: $white;
+  }
+  &__image {
+    position: relative;
+    z-index: 1;
+    padding-top: 15%;
+    height: 100px;
+  }
+  &__logo {
+    height: 100%;
+  }
+}
