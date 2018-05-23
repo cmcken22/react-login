@@ -2,23 +2,55 @@
   font-family: moonBold;
   position: relative;
   z-index: 1;
-  // background-color: $blue;
+  // background-color: $pink;
+  // height: 100%;
+  // width: 100%;
+
   &__text {
-    font-size: 38.77pt;
+    // font-size: 38.77pt;
+    // font-size: 25pt;
+    font-size: 2.1vw;
     color: white;
+    margin: 0;
+    // margin-top: 2.5vw;
+    margin-bottom: 10%;
+  }
+
+  &__forgot-pass {
+    display: inline-flex;
+    margin-bottom: 1.3vw;
+    cursor: pointer;
+    &--text {
+      margin-top: 0 !important;
+      margin-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+    &--circle {
+      stroke: white;
+      stroke-width:1.5;
+      fill:none;
+    }
+    &--solid {
+      stroke: white;
+      stroke-width:1.5;
+      fill: white;;
+    }
   }
 
   &__input {
-    height: 47px;
+    height: $input-height;
     width: 100%;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0px 3px #42a5a5;
     background: #FFFFFF;
-    margin-bottom: 20px;
+    margin-bottom: 5%;
     padding-left: 20px;
     font-family: moonBold;
-    font-size: $font-size;
+    font-size: 1.2vw;
+    // font-size: $font-size;
+
     &--small {
       width: 49%;
     }
@@ -42,8 +74,9 @@
     outline: none;
   }
   &__button {
-    height: 47px;
-    width: 100px;
+    // height: 47px;
+    height: 8.96%;
+    width: 23.95%;
     border: none;
     border-radius: 33px;
     box-shadow: 0px 3px $orange-shadow;
@@ -54,7 +87,7 @@
     }
     &--text {
       font-family: moonBold;
-      font-size: $font-size;
+      font-size: 1.2vw;
       color: white;
     }
   }
@@ -76,115 +109,16 @@
     &--hyperlink {
       font-weight: bold;
       font-style: italic;
+      margin-right: 2px;
     }
   }
   &__bottom-text a {
-    color: $orange-shadow;
+    color: #262262;
     text-decoration: none;
     cursor: pointer;
   }
+  &__bottom-text a:hover {
+    text-decoration: underline;
+  }
 
 }
-
-// .login {
-//   // height: 100%;
-//   // width: 100%;
-//   // background: #E9ECF7;
-//   // font-family: moonBold;
-//   // display: table;
-//   &__container {
-//     // background: #E9ECF7;
-//     // margin: 0 auto; 
-//     // height: 100%;
-//     // width: 33%;
-//     // padding-top: 55px;
-//   }
-//   &__text {
-//     font-size: 38.77pt;
-//     color: #231F20;
-//   }
-//   &__input {
-//     height: 47px;
-//     width: 100%;
-//     border: $black-border;
-//     border-radius: 20px;
-//     background: #FFFFFF;
-//     margin-bottom: 20px;
-//     padding-left: 20px;
-//     font-family: moonBold;
-//     font-size: $font-size;
-//     &--small {
-//       width: 49%;
-//     }
-//     &--left {
-//       float: left;
-//     }
-//     &--right {
-//       float: right;
-//     }
-//   }
-//   &__input::placeholder {
-//     color: #D1D3D4;
-//     font-family: moonBold;
-//     font-size: 100%;
-//   }
-//   &__input:focus{
-//     outline: none;
-//   }
-
-//   &__arrow {
-//     margin-right: 35px;
-//     cursor: pointer;
-//   }
-//   &__start-button-container {
-//     width: 100%;
-//   }
-//   &__start-button-inner {
-//     margin-left: auto;
-//     margin-right: auto;
-//     display: inline-flex;
-//     align-items: center;
-//   }
-  
-//   &__button:focus{
-//     outline: none;
-//   }
-//   &__button {
-//     height: 47px;
-//     width: 100px;
-//     border: none;
-//     border-radius: 33px;
-//     background: $purple;
-//     &--start {
-//       width: 210px;
-//     }
-//     &--text {
-//       font-family: moonBold;
-//       font-size: $font-size;
-//       color: white;
-//     }
-//   }
-//   &__button:hover {
-//     border: solid 1px $purple;
-//     border-radius: 33px;
-//     background: white;
-//   }
-//   &__button:hover > .login__button--text {
-//     color: $purple;
-//   }
-//   &__bottom-text {
-//     color: #414042;
-//     font-family: 'Lato', sans-serif;
-//     white-space: nowrap;
-//     font-size: 8pt;
-//     margin-top: 20px;
-//     &--hyperlink {
-//       font-weight: bold;
-//       font-style: italic;
-//     }
-//   }
-//   &__bottom-text a {
-//     color: $purple;
-//     cursor: pointer;
-//   }
-// }

@@ -1,19 +1,23 @@
 .container {
   height: 100%;
-  width: 60%;
+  width: 100%;
   // background: $pink;
-
+  
   &__inner {
-    height: 100%;
-    width: 50%;
+    height: 53.1%;
+    width: 26.5%;
     margin: 0 auto;
-    // background: $white;
+    position: relative;
+    top: 15%;
+    left: -20%;
+    // overflow: hidden;
+    // background: $blue;
   }
   &__image {
     position: relative;
     z-index: 1;
-    padding-top: 15%;
-    height: 100px;
+    height: 18%;
+    margin-bottom: 6%;
   }
   &__logo {
     height: 100%;

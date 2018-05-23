@@ -1,5 +1,4 @@
 $black-border: solid 1px #231F20;
-$font-size: 13pt;
 $purple: #662D91;
 $orange: #F9A87A;
 $orange-shadow: #F26722;
@@ -8,6 +7,10 @@ $background-toronto: #7CCED0;
 $pink: rgba(255,0,255,0.7);
 $blue: rgba(0,255,255,0.7);
 $white: rgba(255,255,255,0.7);
+
+$header-font-size: 3vw;
+$font-size: 1.6vw;
+$input-height: 11%;
 
 @font-face {
   font-family: moonBold;
@@ -29,7 +32,8 @@ body {
     width: 100%;
     position: relative;
     &--toronto {
-      background-image: url("../assets/Skyline-06.png");
+      display: inline-flex;
+      // background-image: url("../assets/Skyline-06.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
       background-color: $background-toronto;
@@ -52,6 +56,17 @@ body {
 }
 
 .toronto {
+
+  &__backdrop {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    &--image {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
   &__clouds {
     height: 100%;
     width: 100%;
@@ -71,30 +86,55 @@ body {
     &--1 {
       background-image: url('../assets/clouds/SmallSingleCloud-06.png');
       top: 80px;
-      width: 215px;
-      height: 119px;
-      animation: move-cloud 60s infinite;
+      width: 11vw;
+      height: 6vw;
+      animation-delay: -1s;
+      animation: move-cloud-1 60s infinite;
+      // background-color: $blue;
     }
     &--2 {
       background-image: url('../assets/clouds/DoubleCloud-05.png');
       top: 72px;
-      width: 241px;
-      height: 157px;
-      animation: move-cloud 120s infinite;
+      width: 14vw;
+      height: 9vw;
+      animation-delay: -2s;
+      animation: move-cloud-2 120s infinite;
+      // background-color: $pink;
     }
     &--3 {
       background-image: url('../assets/clouds/BigSingleCloud-07.png');
       top: 30px;
-      width: 194px;
-      height: 107px;
-      animation: move-cloud 30s infinite;
+      width: 14.2vw;
+      height: 8vw;
+      animation-delay: -3s;
+      animation: move-cloud-3 50s infinite;
+      // background-color: blue;
+      // left: 64%;
     }
   } 
 }
 
-@keyframes move-cloud {
+@keyframes move-cloud-1 {
   0% {
-    left: 0;
+    left: -11vw;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes move-cloud-2 {
+  0% {
+    left: -14vw;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes move-cloud-3 {
+  0% {
+    left: -14.2vw;
   }
   100% {
     left: 100%;

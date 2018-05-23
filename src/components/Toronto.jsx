@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import toronto from '../assets/skyline.png';
 
 class App extends React.Component {
   
@@ -16,6 +17,9 @@ class App extends React.Component {
           <div className="toronto__cloud toronto__cloud--1"></div><br/>
           <div className="toronto__cloud toronto__cloud--2"></div><br/>
           <div className="toronto__cloud toronto__cloud--3"></div>
+        </div>
+        <div className="toronto__backdrop">
+          <img className="toronto__backdrop--image" src={toronto}/>
         </div>
       </div>
     );

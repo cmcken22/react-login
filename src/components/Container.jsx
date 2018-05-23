@@ -14,10 +14,10 @@ class Container extends React.Component {
   render() {
     let { className, children } = this.props;
     return (
-      <div className={cx("container", {
-        [className]: className
-      })}>
-        <div className="container__inner">
+      <div className="container">
+        <div className={cx("container__inner", {
+          [className]: className
+        })}>
           <div className="container__image">
             <img className="container__logo" src={mainLogo}/>
           </div>
