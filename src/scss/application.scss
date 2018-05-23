@@ -25,42 +25,34 @@ body {
 .main {
   height: 100%;
   width: 100%;
-  // background-color: $white;
   
   &__backdrop {
     height: 100%;
     width: 100%;
     position: relative;
-    &--toronto {
-      display: inline-flex;
-      // background-image: url("../assets/Skyline-06.png");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      background-color: $background-toronto;
-    }
-    &--vancouver {
-      background-image: url("../assets/Skyline-06.png");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      background-color: $pink;
-    }  
   }
 
   &__content {
     height: 100%;
     width: 100%;
-    // background-color: $blue;
     position: absolute;
     top: 0;
   }
 }
 
 .toronto {
+  display: inline-flex;
+  background-color: $background-toronto;
 
   &__backdrop {
     height: 100%;
     width: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    background-image: url("../assets/Skyline-06.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
     &--image {
       height: 100%;
       width: 100%;
@@ -70,11 +62,8 @@ body {
   &__clouds {
     height: 100%;
     width: 100%;
-    margin: 0 auto;
-    position: absolute;
     text-align: initial;
     overflow: hidden;
-    // background: $pink;
   }
   &__cloud {
     display: inline-block;
