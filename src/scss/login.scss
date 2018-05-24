@@ -9,7 +9,7 @@
   &__text {
     // font-size: 38.77pt;
     // font-size: 25pt;
-    font-size: 2.1vw;
+    font-size: $header-font-size;
     color: white;
     margin: 0;
     // margin-top: 2.5vw;
@@ -38,18 +38,44 @@
     }
   }
 
+  &__circle {
+    &--solid {
+      fill: $theme-shadow;
+      stroke: none;
+      stroke-width: 0;
+    }
+    &--empty {
+      fill: white;
+      stroke: $theme-shadow;
+      stroke-width: 0.5;
+    }
+  }
+
+  &__modal {
+    font-family: 'Lato', sans-serif;
+    color: #58595B;
+    &--hyperlink {
+      color: $orange-shadow;
+      text-decoration: none;
+      font-weight: bold;
+      font-style: italic;
+    }
+    &--hyperlink:hover {
+      text-decoration: underline;
+    }
+  }
+
   &__input {
     height: $input-height;
     width: 100%;
     border: none;
     border-radius: 25px;
-    box-shadow: 0px 3px #42a5a5;
+    box-shadow: 0px 3px $theme-shadow;
     background: #FFFFFF;
     margin-bottom: 5%;
     padding-left: 20px;
     font-family: moonBold;
-    font-size: 1.2vw;
-    // font-size: $font-size;
+    font-size: $font-size;
 
     &--small {
       width: 49%;

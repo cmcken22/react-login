@@ -33,27 +33,25 @@ class Login extends React.Component {
   render() {
     return (
       <Container className="login">
-        {/* <div className="login"> */}
-          <h1 className="login__text">Login</h1>
-          <input className="login__input" placeholder="username" ref={r => this.userName = r}/><br/>
-          <PasswordInput />
+        <h1 className="login__text">Login</h1>
+        <input className="login__input" placeholder="username" ref={r => this.userName = r}/><br/>
+        <PasswordInput />
 
-          <div className="login__forgot-pass" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-            <svg height="20" width="20">
-              <circle cx="10" cy="11" r="4" className={cx({
-                "login__forgot-pass--circle": !this.state.hover,
-                "login__forgot-pass--solid": this.state.hover
-              })}/>
-            </svg>
-            <p className="login__bottom-text login__forgot-pass--text">Forgot Password?</p>
-          </div>
-          <br/>
+        <div className="login__forgot-pass" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="4" className={cx({
+              "login__forgot-pass--circle": !this.state.hover,
+              "login__forgot-pass--solid": this.state.hover
+            })}/>
+          </svg>
+          <p className="login__bottom-text login__forgot-pass--text">Forgot Password?</p>
+        </div>
+        <br/>
 
-          <button className="login__button">
-            <div className="login__button--text" onClick={this.handleSubmit}>Enter</div>
-          </button>
-          <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
-        {/* </div> */}
+        <button className="login__button">
+          <div className="login__button--text" onClick={this.handleSubmit}>Enter</div>
+        </button>
+        <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
       </Container>
     );
   }

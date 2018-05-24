@@ -1,0 +1,47 @@
+.modal {
+  // background-color: $pink;
+  width: 115%;
+  position: absolute;
+  left: -7.5%;
+  top: 66%;
+
+  &__overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0px;
+    z-index: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__header {
+    display: table;
+    background-color: #662D91;
+    color: white;
+    margin: 0;
+    height: 50px;
+    width: 110%;
+    position: relative;
+    left: -5%;
+    border-radius: 25px;
+    z-index: 1;
+  }
+  &__header h1 {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 6px;
+    font-size: 1.9vw;
+  }
+  &__content {
+    background-color: white;
+    width: 100%;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    position: relative;
+    z-index: 1;
+    &--inner {
+      padding: 15px 20px;
+    }
+  }
+}

@@ -8,14 +8,14 @@
     width: 26.5%;
     margin: 0 auto;
     position: relative;
-    top: 15%;
+    // top: 15%;
+    padding-top: 7%;
     left: -20%;
-    // overflow: hidden;
     // background: $blue;
   }
   &__image {
     position: relative;
-    z-index: 1;
+    // z-index: 1;
     height: 18%;
     margin-bottom: 6%;
   }

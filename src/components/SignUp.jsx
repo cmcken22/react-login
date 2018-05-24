@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import cx from 'classnames';
 import InputBox from './InputBox.jsx';
 import arrow from'../assets/arrow.png';
-import mainLogo from'../assets/gateThreeLogo.png';
 import Container from'./Container.jsx';
+import PasswordInput from './PasswordInput.jsx';
 import RegistrationForm from'./RegistrationForm.jsx';
 import GetStartedForm from'./GetStartedForm.jsx';
+import Modal from './Modal.jsx';
+
 
 class SignUp extends React.Component {
   
@@ -14,6 +16,7 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       stage: 1,
+      displayModal: false,
       firstName: null,
       lastName: null,
       email: null,
@@ -28,6 +31,15 @@ class SignUp extends React.Component {
   handleSubmit = () => {
   }
 
+  validateEmail = (email) => {
+    console.log(email);
+    var res = email.split("@")[1].split(".")[0];
+    console.log(res);
+    if(res.toUpperCase() === "ELLISDON") {
+      this.setState({displayModal: true});
+    }
+  }
+
   validateSignUpPart1 = () => {
     this.setState({
       firstName: document.getElementById("firstName").value,
@@ -36,6 +48,7 @@ class SignUp extends React.Component {
       company: document.getElementById("company").value,
       role: document.getElementById("role").value
     });
+    this.validateEmail(document.getElementById("email").value);
   }
 
   validateSignUpPart2 = () => {
@@ -50,7 +63,7 @@ class SignUp extends React.Component {
     if(this.state.stage === 1) {
       this.validateSignUpPart1();
     } else if(this.state.stage === 2) {
-      this.validateSignUpPart2();
+      // this.validateSignUpPart2();
     }
     if(this.state.stage !== 4) {
       this.setState({stage: this.state.stage+1});
@@ -68,7 +81,12 @@ class SignUp extends React.Component {
   renderSteps = () => {
     let renderCircle = (solid) => {
       return(
-        <circle cx="5" cy="5" r="4"  fill={solid ? "black" : "white"} stroke={solid ? null : "black"} strokeWidth={solid ? null : "0.5"}/>
+        <circle cx="5" cy="5" r="4"  
+          className={cx({
+            "login__circle--solid": solid,
+            "login__circle--empty": !solid
+          })}
+        />
       );
     }
     return(
@@ -90,38 +108,42 @@ class SignUp extends React.Component {
     this.setState({stage: this.state.stage-1});
   }
 
+  closeModal = () => {
+    this.setState({displayModal: false});
+  }
+
   render() {
     let {stage} = this.state;
 
     return (
-      <Container className={cx({
-        "signup__container--yellow": stage <= 2,
-        "signup__container--grey": stage > 2,
-      })}>
+      <Container className="login">
+        <h1 className="login__text">Sign Up</h1>
+        <input className="login__input login__input--small login__input--left" placeholder="first name" id="firstName" key='firstName' />
+        <input className="login__input login__input--small login__input--right" placeholder="last name" id="lastName" key='lastName' />
+        <input className="login__input" placeholder="email" ref={r => this.email = r} id="email" key='email' /><br/>
+        <input className="login__input" placeholder="company" ref={r => this.company = r} id="company" key='company' /><br/>
+        <InputBox
+          placeholder="role"
+          dropdownTitle="Please select a role."
+          listItems={['Project Manager', 'Subcontractor', 'Consultant', 'Owner', 'Other']}
+        />
 
-        {(stage !== 3 && stage !== 4) ? 
-          <RegistrationForm
-            stage={stage}
-          />
-        :
-          <GetStartedForm
-            user={this.state.firstName}
-            stage={stage}
-            goBack={this.goBack}
-          />
-        }
+        {this.renderSteps()}
 
-        {stage !== 4 ? this.renderSteps() : null}
-
-        {stage !== 4 ?
-          <button className="login__button">
-            <div className="login__button--text" onClick={this.handleNext}>Next</div>
-          </button>
+        {this.state.displayModal ? 
+          <Modal 
+            className="login__modal"
+            title="OOPS..."
+            content={`Hi ${this.state.firstName}! If you are an EllisDon employee, you already have your login credentials.`}
+            footer={(<p>Please <Link to="/Login" className="login__modal--hyperlink">click here</Link> to go back to the Login page.</p>)}
+            closeModal={this.closeModal}
+          />  
         : null}
 
-        {stage !== 4 ? 
-          <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
-        : null} 
+        <button className="login__button">
+          <div className="login__button--text" onClick={this.handleNext}>Next</div>
+        </button>
+        <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
       </Container>
     );
   }

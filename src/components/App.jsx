@@ -10,11 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cloudPos: null,
-      count: 10
     }
   }
-
+  
   render() {
     return (
       <Router>

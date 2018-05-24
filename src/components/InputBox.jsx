@@ -17,7 +17,7 @@ class InputBox extends React.Component {
   renderPoly = (forward) => {
     let direction = forward ? "0,0 0,20 20,10" : "20,0 20,20 0,10";
     return(
-      <polygon points={direction} style={{fill:"#662D91",stroke:"#662D91",strokeWidth:"1"}} />
+      <polygon points={direction} style={{fill:"#7CCED0",stroke:"#7CCED0",strokeWidth:"1"}} />
     );
   }
 
@@ -33,7 +33,7 @@ class InputBox extends React.Component {
   caclDropdownPos = () => {
     let {x, y, width} = this.containerRef.getBoundingClientRect() ? this.containerRef.getBoundingClientRect() : 0;
     this.setState({
-      dropdownPos: {top: y, left: x + width + 5}
+      dropdownPos: {top: y, left: width + 5}
     });
   }
 
