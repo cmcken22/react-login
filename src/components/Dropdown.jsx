@@ -28,7 +28,7 @@ class Dropdown extends React.Component {
     return (
       <div className="dropdown__container">
         <div className="dropdown__header">
-          <p className="dropdown__header--text">Please select a role.</p>
+          <p className="dropdown__header--text">{this.props.title}</p>
         </div>
         <div className="dropdown__list">
           {this.props.listItems.map((item, i) =>   
