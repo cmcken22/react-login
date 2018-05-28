@@ -6,6 +6,12 @@
   // height: 100%;
   // width: 100%;
 
+  &__header {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 7%;
+  }
+
   &__text {
     // font-size: 38.77pt;
     // font-size: 25pt;
@@ -13,7 +19,14 @@
     color: white;
     margin: 0;
     // margin-top: 2.5vw;
-    margin-bottom: 10%;
+    // margin-bottom: 10%;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    height: 6%;
+    margin-right: 10%;
+    cursor: pointer;
   }
 
   &__forgot-pass {
@@ -39,10 +52,12 @@
   }
 
   &__circle {
+    // cursor: pointer;
     &--solid {
       fill: $theme-shadow;
       stroke: none;
       stroke-width: 0;
+      cursor: pointer;
     }
     &--empty {
       fill: white;
@@ -101,9 +116,9 @@
   }
   &__button {
     // height: 47px;
-    height: 8.96%;
+    height: $button-height;
     width: 23.95%;
-    border: none;
+    border: solid 1px $orange;
     border-radius: 33px;
     box-shadow: 0px 3px $orange-shadow;
     background: $orange;

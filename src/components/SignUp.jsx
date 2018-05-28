@@ -68,6 +68,7 @@ class SignUp extends React.Component {
       valid = this.validateSignUpPart1();
     } else if(this.state.stage === 2) {
       this.validateSignUpPart2();
+      valid = true;
     }
     if(this.state.stage !== 4 && valid) {
       this.setState({stage: this.state.stage+1});
@@ -86,7 +87,7 @@ class SignUp extends React.Component {
     let renderCircle = (solid) => {
       return(
         <circle cx="5" cy="5" r="4"  
-          className={cx({
+          className={cx("login__circle", {
             "login__circle--solid": solid,
             "login__circle--empty": !solid
           })}
@@ -121,9 +122,16 @@ class SignUp extends React.Component {
 
     return (
       <Container className="login">
-        {/* {this.state.stage === 1 ?
+        <div className="login__header">
+          {this.state.stage !== 1 ?
+            <img className="login__arrow" src={arrow} onClick={this.goBack}/>
+          : null}
+          <h1 className="login__text">Sign Up</h1>
+        </div>
+        
+        {this.state.stage === 1 ?
           <div>
-            <h1 className="login__text">Sign Up</h1>
+            <br/>
             <input className="login__input login__input--small login__input--left" placeholder="first name" id="firstName" key='firstName' />
             <input className="login__input login__input--small login__input--right" placeholder="last name" id="lastName" key='lastName' />
             <input className="login__input" placeholder="email" ref={r => this.email = r} id="email" key='email' /><br/>
@@ -134,17 +142,20 @@ class SignUp extends React.Component {
               listItems={['Project Manager', 'Subcontractor', 'Consultant', 'Owner', 'Other']}
             />
           </div>
+        : this.state.stage === 2 ?
+          <div>
+            <InputBox
+              placeholder="projects"
+              dropdownTitle="Please select all that apply."
+              listItems={['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5']}
+            />
+            <input className="login__input" placeholder="new password" ref={r => this.newPass = r} id="newPass" key='newPass' /><br/>
+            <input className="login__input" placeholder="confirm password" ref={r => this.confirmedPass = r} id="confirmedPass" key='confirmedPass' /><br/>
+          </div>  
         : 
-        <div>
-          <h1 className="login__text">Sign Up</h1>
-          <InputBox
-            placeholder="projects"
-            dropdownTitle="Please select all that apply."
-            listItems={['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5']}
-          />
-          <input className="login__input" placeholder="new password" ref={r => this.newPass = r} id="newPass" key='newPass' /><br/>
-          <input className="login__input" placeholder="confirm password" ref={r => this.confirmedPass = r} id="confirmedPass" key='confirmedPass' /><br/>
-        </div>  
+          <div>
+
+          </div>
         }
 
         {this.renderSteps()}
@@ -162,7 +173,7 @@ class SignUp extends React.Component {
         <button className="login__button">
           <div className="login__button--text" onClick={this.handleNext}>Next</div>
         </button>
-        <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p> */}
+        <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
       </Container>
     );
   }
