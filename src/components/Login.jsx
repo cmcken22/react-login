@@ -13,7 +13,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       hover: false,
-      resetPassword: !false,
+      resetPassword: false,
       resetSuccess: false,
     }
   }
@@ -103,8 +103,8 @@ class Login extends React.Component {
             </div>
             <br/>
 
-            <button className="login__button">
-              <div className="login__button--text" onClick={this.handleSubmit}>Enter</div>
+            <button className="login__button" onClick={this.handleSubmit}>
+              <div className="login__button--text">Enter</div>
             </button>
             <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
           </div>

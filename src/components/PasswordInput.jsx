@@ -23,13 +23,14 @@ class PasswordInput extends React.Component {
   }
 
   render() {
+    const id = this.props.id || "password";
     const placeholder = this.props.placeholder || "password";
 
     return (
       <div className="passwordInput__container" ref={r => this.containerRef = r}>
         <div className="passwordInput__inner">
           
-          <input className="passwordInput__input" type={this.state.open ? "password" : "text"} id={placeholder} placeholder={placeholder} ref={r => this.input = r}/>
+          <input className="passwordInput__input" type={this.state.open ? "password" : "text"} id={id} placeholder={placeholder}/>
           {this.renderEye(this.state.open)}
         </div>
       </div>

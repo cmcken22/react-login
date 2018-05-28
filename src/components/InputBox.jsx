@@ -43,7 +43,7 @@ class InputBox extends React.Component {
   }
 
   render() {
-    let {placeholder} = this.props;
+    let {placeholder, selectMultiple} = this.props;
 
     return (
       <div className="inputbox__container" ref={r => this.containerRef = r}>
@@ -60,6 +60,7 @@ class InputBox extends React.Component {
                 title={this.props.dropdownTitle}
                 listItems={this.props.listItems}
                 onSelect={this.handleSelect}
+                selectMultiple={selectMultiple}
               />
             </div>
           : null}

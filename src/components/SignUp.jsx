@@ -17,6 +17,7 @@ class SignUp extends React.Component {
     this.state = {
       stage: 1,
       displayModal: false,
+      displayPreview: false,
       firstName: null,
       lastName: null,
       email: null,
@@ -31,11 +32,11 @@ class SignUp extends React.Component {
   handleSubmit = () => {
   }
 
-  validateEmail = (email) => {
+  validateEmail = (userEmail) => {
+    let email = userEmail || document.getElementById("email").value;
     console.log(email);
     if(email === "") return true;
     var res = email.split("@")[1].split(".")[0];
-    console.log(res);
     if(res.toUpperCase() === "ELLISDON" || res.toUpperCase() === "ED") {
       this.setState({displayModal: true});
       return false;
@@ -55,11 +56,15 @@ class SignUp extends React.Component {
   }
 
   validateSignUpPart2 = () => {
-    this.setState({
-      password: document.getElementById("newPass").value,
-      confirmedPassword: document.getElementById("confirmedPass").value,
-      project: document.getElementById("projects").value
-    });
+    if(document.getElementById("newPass").value === document.getElementById("confirmedPass").value) {
+      this.setState({
+        password: document.getElementById("newPass").value,
+        confirmedPassword: document.getElementById("confirmedPass").value,
+        project: document.getElementById("projects").value
+      });
+      return true;
+    }
+    return false;
   }
 
   handleNext = () => {
@@ -69,14 +74,12 @@ class SignUp extends React.Component {
     } else if(this.state.stage === 2) {
       this.validateSignUpPart2();
       valid = true;
+    } else {
+      valid = true;
     }
-    if(this.state.stage !== 4 && valid) {
+    if(valid) {
       this.setState({stage: this.state.stage+1});
     }
-  }
-
-  handleClickhere = () => {
-    this.props.toggleLogin(true);
   }
 
   handleStepClick = (index) => {
@@ -117,25 +120,36 @@ class SignUp extends React.Component {
     this.setState({displayModal: false});
   }
 
+  renderHeader = (title) => {
+    return (
+      <div className="login__header">
+        {this.state.stage !== 1 && this.state.stage !== 4 ?
+          <img className="login__arrow" src={arrow} onClick={this.goBack}/>
+        : null}
+        <h1 className="login__text">{title}</h1>
+      </div>
+    );
+  }
+
+  showPreview = () => {
+    this.setState({displayPreview: !this.state.displayPreview});
+  }
+
   render() {
     let {stage} = this.state;
-
+    let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
+    let stage4_text = "Thank you! You can always customize your dashboard later, but for now click below to get started, or go back if you change your mind.";
+    
     return (
       <Container className="login">
-        <div className="login__header">
-          {this.state.stage !== 1 ?
-            <img className="login__arrow" src={arrow} onClick={this.goBack}/>
-          : null}
-          <h1 className="login__text">Sign Up</h1>
-        </div>
-        
         {this.state.stage === 1 ?
           <div>
+            {this.renderHeader("Sign Up")}
             <br/>
-            <input className="login__input login__input--small login__input--left" placeholder="first name" id="firstName" key='firstName' />
-            <input className="login__input login__input--small login__input--right" placeholder="last name" id="lastName" key='lastName' />
-            <input className="login__input" placeholder="email" ref={r => this.email = r} id="email" key='email' /><br/>
-            <input className="login__input" placeholder="company" ref={r => this.company = r} id="company" key='company' /><br/>
+            <input className="login__input login__input--small login__input--left" placeholder="first name" id="firstName" key='firstName' onBlur={this.validateSignUpPart1}/>
+            <input className="login__input login__input--small login__input--right" placeholder="last name" id="lastName" key='lastName' onBlur={this.validateSignUpPart1}/>
+            <input className="login__input" placeholder="email" ref={r => this.email = r} id="email" key='email'onBlur={() => this.validateEmail()}/><br/>
+            <input className="login__input" placeholder="company" ref={r => this.company = r} id="company" key='company' onBlur={this.validateSignUpPart1}/><br/>
             <InputBox
               placeholder="role"
               dropdownTitle="Please select a role."
@@ -144,21 +158,63 @@ class SignUp extends React.Component {
           </div>
         : this.state.stage === 2 ?
           <div>
+            {this.renderHeader("Sign Up")}
             <InputBox
               placeholder="projects"
               dropdownTitle="Please select all that apply."
               listItems={['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5']}
+              selectMultiple={true}
             />
-            <input className="login__input" placeholder="new password" ref={r => this.newPass = r} id="newPass" key='newPass' /><br/>
-            <input className="login__input" placeholder="confirm password" ref={r => this.confirmedPass = r} id="confirmedPass" key='confirmedPass' /><br/>
+            <PasswordInput placeholder="new password" id="newPass"/>
+            <PasswordInput placeholder="confirm password" id="confirmedPass"/>
           </div>  
         : 
           <div>
+            {this.renderHeader(`Hi ${this.state.firstName}!`)}
+            {this.state.stage === 3 ? 
+              <div>
+                <p className="login__getstarted__text login__getstarted__text--small-bm">{stage3_text}</p>
+                <p className="login__getstarted__text login__getstarted__text--bold"><span className="login__getstarted__text--italic">Click here</span> to preview both or choose below.</p>
+                <div className="login__getstarted-buttons">
+                  <button className="login__getstarted-button login__getstarted-button--left">
+                    <div className="login__getstarted-button__text">Customize</div>
+                  </button>
+                  <button className="login__getstarted-button  login__getstarted-button--right"  onClick={this.showPreview}>
+                    <div className="login__getstarted-button__text login__getstarted-button__text--white">Existing</div>
+                  </button>
+                </div>
+                {this.state.displayPreview ? 
+                  <div className="login__preview-container">
+                    <div className="login__preview-inner">
+                      <p className="login__preview-text">Existing Dashboard Preview.</p>
+                    </div>
+                  </div>  
+                : null}
+              </div>  
+            : 
+              <div>
+                <p className="login__getstarted__text">{stage4_text}</p>
+                <div className="login__button-container">
+                  <img className="login__arrow" src={arrow} onClick={this.goBack}/>
+                  <button className="login__button" style={{width: '12vw'}}>
+                    <div className="login__button--text">Get Started</div>
+                  </button>
+                </div>
+              </div>
+            }
 
           </div>
         }
 
-        {this.renderSteps()}
+        {this.state.stage !== 4 ?
+          <div>
+            {this.renderSteps()}
+            <button className="login__button" onClick={this.handleNext}>
+              <div className="login__button--text">Next</div>
+            </button>
+            <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
+          </div>
+        : null}
 
         {this.state.displayModal ? 
           <Modal 
@@ -169,11 +225,6 @@ class SignUp extends React.Component {
             closeModal={this.closeModal}
           />  
         : null}
-
-        <button className="login__button">
-          <div className="login__button--text" onClick={this.handleNext}>Next</div>
-        </button>
-        <p className="login__bottom-text">If you have an account, please <Link to="/Login" className="login__bottom-text--hyperlink">click here</Link> to Log in</p>
       </Container>
     );
   }
