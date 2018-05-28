@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import Dropdown from './Dropdown.jsx';
 
 class InputBox extends React.Component {
@@ -32,24 +33,37 @@ class InputBox extends React.Component {
 
   caclDropdownPos = () => {
     let {x, y, width} = this.containerRef.getBoundingClientRect() ? this.containerRef.getBoundingClientRect() : 0;
-    console.log(x, y);
     this.setState({
       dropdownPos: {top: 0, left: width + 5}
     });
   }
 
   handleSelect = (item) => {
-    this.input.value = item;
+    this.input.value = item.title;
+    if(item.closeOnSelect) {
+      this.setState({dropdownActive: false});
+    }
+    if(this.props.onBlur) this.props.onBlur();
+    this.input.focus();
+  }
+
+  onFocus = () => {
+    if(this.props.onFocus) this.props.onFocus();
   }
 
   render() {
     let {placeholder} = this.props;
 
     return (
-      <div className="inputbox__container" ref={r => this.containerRef = r}>
+      <div 
+        ref={r => this.containerRef = r}
+        className={cx("inputbox__container", {
+          [this.props.classname]: this.props.classname
+        })} 
+      >
         <div className="inputbox__inner">
           
-          <input className="inputbox__input" id={placeholder} placeholder={placeholder} ref={r => this.input = r}/>
+          <input className="inputbox__input" id={placeholder} placeholder={placeholder} ref={r => this.input = r} onFocus={this.onFocus} onBlur={this.props.onBlur}/>
           <svg className="inputbox__svg" height="20" width="22" onClick={this.handleClick}>
             {this.renderPoly(!this.state.dropdownActive)}
           </svg>

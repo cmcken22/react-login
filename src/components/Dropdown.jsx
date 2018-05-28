@@ -12,7 +12,7 @@ class Dropdown extends React.Component {
   }
   
   handleClick = (item) => {
-    this.setState({activeElement: item});
+    this.setState({activeElement: item.title});
     this.props.onSelect(item);
   }
 
@@ -33,7 +33,7 @@ class Dropdown extends React.Component {
         <div className="dropdown__list">
           {this.props.listItems.map((item, i) =>   
             <div 
-              key={item} 
+              key={item.title} 
               className="dropdown__list-item"
               onClick={() => this.handleClick(item)} 
               onMouseEnter={() => this.onMouseEnter(i)} 
@@ -42,12 +42,12 @@ class Dropdown extends React.Component {
               <div className="dropdown__list-item__bullet">
                 <svg height="20" width="20">
                   <circle cx="10" cy="11" r="4" className={cx("dropdown__list-item__bullet__circle", {
-                    "dropdown__list-item__bullet__circle--solid": this.state.activeIndex === i || this.state.activeElement === item
+                    "dropdown__list-item__bullet__circle--solid": this.state.activeIndex === i || this.state.activeElement === item.title
                   })}/>
                 </svg>
               </div>
               <div className="dropdown__list-item__content">
-                <p>{item}</p>
+                <p>{item.title}</p>
               </div>
             </div>
           )}

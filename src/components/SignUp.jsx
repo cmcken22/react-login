@@ -18,6 +18,7 @@ class SignUp extends React.Component {
       stage: 1,
       displayModal: false,
       displayPreview: false,
+      drawerOpen: false,
       firstName: null,
       lastName: null,
       email: null,
@@ -135,6 +136,26 @@ class SignUp extends React.Component {
     this.setState({displayPreview: !this.state.displayPreview});
   }
 
+  openDrawer = (value) => {
+    this.setState({drawerOpen: value});
+  }
+
+  onProjectBlur = () => {
+    let project = document.getElementById("projects").value;
+    if(project === "New Project") {
+      this.openDrawer(true);
+    } else {
+      this.openDrawer(false);
+    }
+  }
+
+  onProjectFocus = () => {
+    let project = document.getElementById("projects").value;
+    if(project === "New Project") {
+      this.openDrawer(true);
+    }
+  }
+
   render() {
     let {stage} = this.state;
     let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
@@ -153,19 +174,42 @@ class SignUp extends React.Component {
             <InputBox
               placeholder="role"
               dropdownTitle="Please select a role."
-              listItems={['Project Manager', 'Subcontractor', 'Consultant', 'Owner', 'Other']}
+              listItems={[{title:'Project Manager'}, {title:'Subcontractor'}, {title:'Consultant'}, {title:'Owner'}, {title:'Other'}]}
             />
           </div>
         : this.state.stage === 2 ?
           <div>
             {this.renderHeader("Sign Up")}
             <InputBox
+              classname={cx({"login__projects-dropdown": this.state.drawerOpen})}
               placeholder="projects"
               dropdownTitle="Please select all that apply."
-              listItems={['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5']}
+              listItems={
+              this.state.role === "Project Manager" ?
+                [{title:'New Project', closeOnSelect: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
+                [{title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}]
+              }
+              onBlur={this.onProjectBlur}
+              onFocus={this.onProjectFocus}
             />
-            <PasswordInput placeholder="new password" id="newPass"/>
-            <PasswordInput placeholder="confirm password" id="confirmedPass"/>
+            {this.state.drawerOpen ? 
+              <div className="login__drawer">
+                <input className="login__drawer__item" placeholder="project name"/>
+                <input className="login__drawer__item" placeholder="project #"/>
+                <input className="login__drawer__item" placeholder="project region"/>
+                <input className="login__drawer__item" placeholder="project type" onBlur={() => this.openDrawer(false)}/>
+              </div>
+            : null}
+            <PasswordInput 
+              id="newPass"
+              placeholder="new password" 
+              onFocus={() => this.openDrawer(false)}
+            />
+            <PasswordInput 
+              id="confirmedPass"
+              placeholder="confirm password" 
+              onFocus={() => this.openDrawer(false)}
+            />
           </div>  
         : 
           <div>
@@ -182,13 +226,13 @@ class SignUp extends React.Component {
                     <div className="login__getstarted-button__text login__getstarted-button__text--white">Existing</div>
                   </button>
                 </div>
-                {this.state.displayPreview ? 
+                {/* {this.state.displayPreview ? 
                   <div className="login__preview-container">
                     <div className="login__preview-inner">
                       <p className="login__preview-text">Existing Dashboard Preview.</p>
                     </div>
                   </div>  
-                : null}
+                : null} */}
               </div>  
             : 
               <div>
