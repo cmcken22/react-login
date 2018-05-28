@@ -163,7 +163,6 @@ class SignUp extends React.Component {
               placeholder="projects"
               dropdownTitle="Please select all that apply."
               listItems={['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5']}
-              selectMultiple={true}
             />
             <PasswordInput placeholder="new password" id="newPass"/>
             <PasswordInput placeholder="confirm password" id="confirmedPass"/>
