@@ -13,19 +13,29 @@
   }
 
   &__text {
-    // font-size: 38.77pt;
-    // font-size: 25pt;
     font-size: $header-font-size;
     color: white;
     margin: 0;
-    // margin-top: 2.5vw;
-    // margin-bottom: 10%;
     white-space: nowrap;
+  }
+
+  &__sub-header-text {
+    color: white;
+    margin: 0;
+    font-size: 0.8vw;
+    margin-bottom: 10%;
+    padding: 0 11%;
+    font-family: 'Lato', sans-serif;
   }
 
   &__arrow {
     height: 6%;
     margin-right: 10%;
+    cursor: pointer;
+  }
+  
+  &__checkmark {
+    height: 11%;
     cursor: pointer;
   }
 
@@ -111,11 +121,15 @@
     outline: none;
   }
 
+  &__button-container {
+    display: inline-flex;
+    align-items: center;
+  }
+
   &__button:focus{
     outline: none;
   }
   &__button {
-    // height: 47px;
     height: $button-height;
     width: 23.95%;
     border: solid 1px $orange;
@@ -123,6 +137,10 @@
     box-shadow: 0px 3px $orange-shadow;
     background: $orange;
     cursor: pointer;
+    &--spec {
+      height: 2.7vw;
+      width: 7vw;
+    }
     &--start {
       width: 210px;
     }
@@ -130,6 +148,7 @@
       font-family: moonBold;
       font-size: 1.2vw;
       color: white;
+      padding: 0 15%;
     }
   }
   &__button:hover {
