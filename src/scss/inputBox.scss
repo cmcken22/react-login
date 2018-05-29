@@ -18,6 +18,14 @@
     width: 100%;
   }
   
+  &__poly {
+    @include themify($themes) {
+      fill: themed('backgroundColor');
+      stroke: themed('backgroundColor');
+    }
+    stroke-width: 1;
+  }
+
   &__input {
     width: calc(100% - 40px);
     padding-left: 20px;

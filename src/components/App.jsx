@@ -43,8 +43,14 @@ class App extends React.Component {
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition, this.geoLocationError);
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      console.log("Geolocation is not supported by your browser.");
+      this.selectRandomCity();
     }
+  }
+
+  selectRandomCity = () => {
+    let rand = Math.floor(Math.random() * this.state.cities.length);
+    this.setState({currentCity: this.state.cities[rand].name});
   }
 
   showPosition = (position) => {
@@ -65,7 +71,7 @@ class App extends React.Component {
   geoLocationError = (error) => {
     if (error.code == error.PERMISSION_DENIED) {
       console.log('geolocation permission denied');
-      this.setState({currentCity: 'toronto'});
+      this.selectRandomCity();
     }
   }
 

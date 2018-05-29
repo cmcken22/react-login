@@ -18,7 +18,7 @@ class InputBox extends React.Component {
   renderPoly = (forward) => {
     let direction = forward ? "0,0 0,20 20,10" : "20,0 20,20 0,10";
     return(
-      <polygon points={direction} style={{fill:"#7CCED0",stroke:"#7CCED0",strokeWidth:"1"}} />
+      <polygon points={direction} className="inputbox__poly" />
     );
   }
 
