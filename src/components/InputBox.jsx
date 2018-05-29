@@ -43,6 +43,7 @@ class InputBox extends React.Component {
     if(item.closeOnSelect) {
       this.setState({dropdownActive: false});
     }
+    if(this.props.handleSelect) this.props.handleSelect(this.props.id, item.title);
     if(this.props.onBlur) this.props.onBlur();
     this.input.focus();
   }
@@ -51,8 +52,12 @@ class InputBox extends React.Component {
     if(this.props.onFocus) this.props.onFocus();
   }
 
+  preOnChange = (e) => {
+    if(this.props.onChange) this.props.onChange(e);
+  }
+
   render() {
-    let {placeholder} = this.props;
+    let {id, placeholder} = this.props;
 
     return (
       <div 
@@ -62,8 +67,16 @@ class InputBox extends React.Component {
         })} 
       >
         <div className="inputbox__inner">
-          
-          <input className="inputbox__input" id={placeholder} placeholder={placeholder} ref={r => this.input = r} onFocus={this.onFocus} onBlur={this.props.onBlur}/>
+          <input 
+            id={id || placeholder}
+            placeholder={placeholder}
+            className="inputbox__input"
+            ref={r => this.input = r}
+            onFocus={this.onFocus}
+            onBlur={this.props.onBlur}
+            onChange={this.preOnChange}
+            value={this.props.value}
+          />
           <svg className="inputbox__svg" height="20" width="22" onClick={this.handleClick}>
             {this.renderPoly(!this.state.dropdownActive)}
           </svg>

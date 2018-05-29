@@ -5,8 +5,6 @@ import InputBox from './InputBox.jsx';
 import arrow from'../assets/arrow.png';
 import Container from'./Container.jsx';
 import PasswordInput from './PasswordInput.jsx';
-import RegistrationForm from'./RegistrationForm.jsx';
-import GetStartedForm from'./GetStartedForm.jsx';
 import Modal from './Modal.jsx';
 
 
@@ -19,14 +17,14 @@ class SignUp extends React.Component {
       displayModal: false,
       displayPreview: false,
       drawerOpen: false,
-      firstName: null,
-      lastName: null,
-      email: null,
-      company: null,
-      role: null,
-      password: null,
-      confirmedPassword: null,
-      project: null
+      firstName: "",
+      lastName: "",
+      email: "",
+      company: "",
+      role: "",
+      password: "",
+      confirmedPassword: "",
+      projects: ""
     }
   }
 
@@ -61,7 +59,7 @@ class SignUp extends React.Component {
       this.setState({
         password: document.getElementById("newPass").value,
         confirmedPassword: document.getElementById("confirmedPass").value,
-        project: document.getElementById("projects").value
+        projects: document.getElementById("projects").value
       });
       return true;
     }
@@ -69,18 +67,18 @@ class SignUp extends React.Component {
   }
 
   handleNext = () => {
-    let valid = false;
-    if(this.state.stage === 1) {
-      valid = this.validateSignUpPart1();
-    } else if(this.state.stage === 2) {
-      this.validateSignUpPart2();
-      valid = true;
-    } else {
-      valid = true;
-    }
-    if(valid) {
+    // let valid = false;
+    // if(this.state.stage === 1) {
+    //   valid = this.validateSignUpPart1();
+    // } else if(this.state.stage === 2) {
+    //   this.validateSignUpPart2();
+    //   valid = true;
+    // } else {
+    //   valid = true;
+    // }
+    // if(valid) {
       this.setState({stage: this.state.stage+1});
-    }
+    // }
   }
 
   handleStepClick = (index) => {
@@ -156,6 +154,14 @@ class SignUp extends React.Component {
     }
   }
 
+  onChange = (key) => (e) => {
+    this.setState({[key]: e.target.value});
+  }
+
+  handleSelectDropdown = (key, value) => {
+    this.setState({[key]: value});
+  }
+
   render() {
     let {stage} = this.state;
     let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
@@ -167,12 +173,32 @@ class SignUp extends React.Component {
           <div>
             {this.renderHeader("Sign Up")}
             <br/>
-            <input className="login__input login__input--small login__input--left" placeholder="first name" id="firstName" key='firstName' onBlur={this.validateSignUpPart1}/>
-            <input className="login__input login__input--small login__input--right" placeholder="last name" id="lastName" key='lastName' onBlur={this.validateSignUpPart1}/>
-            <input className="login__input" placeholder="email" ref={r => this.email = r} id="email" key='email'onBlur={() => this.validateEmail()}/><br/>
-            <input className="login__input" placeholder="company" ref={r => this.company = r} id="company" key='company' onBlur={this.validateSignUpPart1}/><br/>
+            <input className="login__input login__input--small login__input--left" 
+              placeholder="first name" id="firstName" key='firstName' 
+              onChange={this.onChange('firstName')}
+              value={this.state.firstName}
+            />
+            <input className="login__input login__input--small login__input--right" 
+              placeholder="last name" id="lastName" key='lastName' 
+              onChange={this.onChange('lastName')}
+              value={this.state.lastName}
+            />
+            <input className="login__input" 
+              placeholder="email" ref={r => this.email = r} id="email" key='email'
+              onChange={this.onChange('email')}
+              value={this.state.email}
+            /><br/>
+            <input className="login__input" 
+              placeholder="company" ref={r => this.company = r} id="company" key='company' 
+              onChange={this.onChange('company')}
+              value={this.state.company}
+            /><br/>
             <InputBox
+              id="role"
               placeholder="role"
+              onChange={this.onChange('role')}
+              handleSelect={this.handleSelectDropdown}
+              value={this.state.role}
               dropdownTitle="Please select a role."
               listItems={[{title:'Project Manager'}, {title:'Subcontractor'}, {title:'Consultant'}, {title:'Owner'}, {title:'Other'}]}
             />
@@ -182,8 +208,12 @@ class SignUp extends React.Component {
             {this.renderHeader("Sign Up")}
             <InputBox
               classname={cx({"login__projects-dropdown": this.state.drawerOpen})}
+              id="projects"
               placeholder="projects"
               dropdownTitle="Please select all that apply."
+              onChange={this.onChange('projects')}
+              handleSelect={this.handleSelectDropdown}
+              value={this.state.projects}
               listItems={
               this.state.role === "Project Manager" ?
                 [{title:'New Project', closeOnSelect: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
@@ -203,12 +233,16 @@ class SignUp extends React.Component {
             <PasswordInput 
               id="newPass"
               placeholder="new password" 
+              onChange={this.onChange('newPass')}
               onFocus={() => this.openDrawer(false)}
+              value={this.state.newPass}
             />
             <PasswordInput 
               id="confirmedPass"
               placeholder="confirm password" 
+              onChange={this.onChange('confirmedPass')}
               onFocus={() => this.openDrawer(false)}
+              value={this.state.confirmedPass}
             />
           </div>  
         : 
@@ -226,13 +260,6 @@ class SignUp extends React.Component {
                     <div className="login__getstarted-button__text login__getstarted-button__text--white">Existing</div>
                   </button>
                 </div>
-                {/* {this.state.displayPreview ? 
-                  <div className="login__preview-container">
-                    <div className="login__preview-inner">
-                      <p className="login__preview-text">Existing Dashboard Preview.</p>
-                    </div>
-                  </div>  
-                : null} */}
               </div>  
             : 
               <div>

@@ -26,6 +26,10 @@ class PasswordInput extends React.Component {
     if(this.props.onFocus) this.props.onFocus();
   }
 
+  preOnChange = (e) => {
+    if(this.props.onChange) this.props.onChange(e);
+  }
+
   render() {
     const id = this.props.id || "password";
     const placeholder = this.props.placeholder || "password";
@@ -33,8 +37,15 @@ class PasswordInput extends React.Component {
     return (
       <div className="passwordInput__container" ref={r => this.containerRef = r}>
         <div className="passwordInput__inner">
-          
-          <input className="passwordInput__input" onFocus={this.onFocus} type={this.state.open ? "password" : "text"} id={id} placeholder={placeholder}/>
+          <input 
+            id={id}
+            placeholder={placeholder}
+            onFocus={this.onFocus}
+            onChange={this.preOnChange}
+            className="passwordInput__input"
+            type={this.state.open ? "password" : "text"}
+            value={this.props.value}
+          />
           {this.renderEye(this.state.open)}
         </div>
       </div>
