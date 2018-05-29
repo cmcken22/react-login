@@ -1,11 +1,5 @@
 $black-border: solid 1px #231F20;
 $purple: #662D91;
-$orange: #F9A87A;
-$orange-shadow: #F26722;
-
-$background-toronto: #7CCED0;
-$theme-shadow: #42a5a5;
-
 $pink: rgba(255,0,255,0.7);
 $blue: rgba(0,255,255,0.7);
 $white: rgba(255,255,255,0.7);
@@ -14,6 +8,64 @@ $header-font-size: 2.1vw;
 $font-size: 1.2vw;
 $input-height: 5.83%;
 $button-height: 4.76%;
+
+//set to Toronto by default
+$theme-background: #7CCED0;
+$theme-shadow: #42a5a5;
+$theme-button: #F9A87A;
+$theme-button-shadow: #F26722;
+
+$themes: (
+  toronto: (
+    backgroundColor: #7CCED0,
+    shadow: #42a5a5,
+    button: #F9A87A,
+    buttonShadow: #F26722,
+    hyperlink: #262262
+  ),
+  ottawa: (
+    backgroundColor: #F9BAC0,
+    shadow: #CE5D6D,
+    button: #AFD9AB,
+    buttonShadow: #61B258,
+    hyperlink: #CE4A52
+  ),
+  edmonton: (
+    backgroundColor: #BFA1CC,
+    shadow: #8D58A4,
+    button: #F5F087,
+    buttonShadow: #A79733,
+    hyperlink: #70439A
+  ),
+  vancouver: (
+    backgroundColor: #ADDBC5,
+    shadow: #569B78,
+    button: #DBB3AD,
+    buttonShadow: #A5706A,
+    hyperlink: #3B8E68
+  ),
+);
+
+/*
+ * Implementation of themes
+ */
+ @mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
 
 @font-face {
   font-family: moonBold;
@@ -34,7 +86,7 @@ body {
     width: 100%;
     position: relative;
   }
-
+  
   &__content {
     height: 100%;
     width: 100%;
@@ -45,14 +97,16 @@ body {
 
 .toronto {
   display: inline-flex;
-  background-color: $background-toronto;
+  @include themify($themes) {
+    background-color: themed('backgroundColor');  
+  }
 
   &__backdrop {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
-    background-image: url("../assets/Skyline-06.png");
+    background-image: url("../assets/skylines/toronto.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
@@ -104,6 +158,59 @@ body {
       // left: 64%;
     }
   } 
+}
+
+.ottawa {
+  display: inline-flex;
+  @include themify($themes) {
+    background-color: themed('backgroundColor');  
+  }
+
+  &__backdrop {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-image: url("../assets/skylines/ottawa.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+.edmonton {
+  display: inline-flex;
+  @include themify($themes) {
+    background-color: themed('backgroundColor');  
+  }
+
+  &__backdrop {
+    height: 70%;
+    width: 70%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-image: url("../assets/skylines/edmonton.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+.vancouver {
+  display: inline-flex;
+  @include themify($themes) {
+    background-color: themed('backgroundColor');  
+  }
+
+  &__backdrop {
+    height: 84%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-image: url("../assets/skylines/vancouver.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
 }
 
 @keyframes move-cloud-1 {
