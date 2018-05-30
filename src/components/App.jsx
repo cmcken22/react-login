@@ -1,18 +1,23 @@
 import React from 'react';
 import cx from 'classnames';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import Toronto from './skylines/Toronto.jsx';
 import Ottawa from './skylines/Ottawa.jsx';
 import Edmonton from './skylines/Edmonton.jsx';
 import Vancouver from './skylines/Vancouver.jsx';
+import * as charactersActions from './../actions/charactersActions';
 
 class App extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
+      currentCity: null,
       cities: [
         {
           name: 'vancouver',
@@ -34,12 +39,14 @@ class App extends React.Component {
           long: -113.4909,
           lat: 53.5444,
         },
-      ],
-      currentCity: null
+      ]
     }
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
+    this.props.charactersActions.init();
+
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition, this.geoLocationError);
     } else {
@@ -77,6 +84,7 @@ class App extends React.Component {
 
   render() {
     let {currentCity} = this.state;
+    
     return (
       <Router>
         <div className={`main theme-${this.state.currentCity}`}>
@@ -108,4 +116,15 @@ class App extends React.Component {
 
 const NotFound = () => (<h1>404</h1>)
 
-export default App;
+export default connect(
+  state => {
+    return {
+      characters: state.characters,
+    }
+  },
+  dispatch => {
+    return {
+      charactersActions: bindActionCreators(charactersActions, dispatch)
+    }
+  }
+)(App);
