@@ -1,11 +1,14 @@
 import React from 'react';
 import cx from 'classnames';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import mainLogo from'../assets/gateThreeLogo.png';
 import arrow from'../assets/arrow.png';
 import checkmark from'../assets/success.svg';
 import Container from'./Container.jsx';
-import PasswordInput from './PasswordInput.jsx';
+import PasswordInput from './PasswordInput.jsx'; 
+import * as formActions from './../actions/formActions';
 
 class Login extends React.Component {
   
@@ -53,7 +56,13 @@ class Login extends React.Component {
     this.setState({resetSuccess: true});
   }
 
+  onChange = (key) => (e) => {
+    this.props.formActions.setFormByValue(key, e.target.value);
+  }
+
   render() {
+    let {form} = this.props;
+    
     return (
       <Container className="login">
 
@@ -66,7 +75,12 @@ class Login extends React.Component {
             {!this.state.resetSuccess ? 
               <div>
                 <p className="login__sub-header-text">Write your email in the box below and we will email you a link to reset your password.</p>
-                <input className="login__input" placeholder="email" ref={r => this.email = r}/><br/>
+                <input 
+                  className="login__input"
+                  placeholder="email"
+                  onChange={this.onChange('email')}
+                  value={form.get('email')}
+                /><br/>
                 
                 <div className="login__button-container">
                   <img className="login__arrow" src={arrow} onClick={this.goBack}/>
@@ -89,8 +103,16 @@ class Login extends React.Component {
             <div className="login__header">
               <h1 className="login__text">Login</h1>
             </div>
-            <input className="login__input" placeholder="username" ref={r => this.userName = r}/><br/>
-            <PasswordInput />
+            <input
+              className="login__input"
+              placeholder="username"
+              onChange={this.onChange('userName')}
+              value={form.get('userName')}
+            /><br/>
+            <PasswordInput 
+              onChange={this.onChange('password')}
+              value={form.get('password')}
+            />
 
             <div className="login__forgot-pass" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.resetPassword}>
               <svg height="20" width="20">
@@ -116,4 +138,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default connect(
+  state => {
+    return {
+      form: state.form
+    }
+  },
+  dispatch => {
+    return {
+      formActions: bindActionCreators(formActions, dispatch)
+    }
+  }
+)(Login);

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import cx from 'classnames';
 import InputBox from './InputBox.jsx';
 import arrow from'../assets/arrow.png';
 import Container from'./Container.jsx';
 import PasswordInput from './PasswordInput.jsx';
 import Modal from './Modal.jsx';
+import * as formActions from './../actions/formActions';
 
 
 class SignUp extends React.Component {
@@ -16,15 +19,7 @@ class SignUp extends React.Component {
       stage: 1,
       displayModal: false,
       displayPreview: false,
-      drawerOpen: false,
-      firstName: "",
-      lastName: "",
-      email: "",
-      company: "",
-      role: "",
-      password: "",
-      confirmedPassword: "",
-      projects: ""
+      drawerOpen: false
     }
   }
 
@@ -33,7 +28,6 @@ class SignUp extends React.Component {
 
   validateEmail = (userEmail) => {
     let email = userEmail || document.getElementById("email").value;
-    console.log(email);
     if(email === "") return true;
     var res = email.split("@")[1].split(".")[0];
     if(res.toUpperCase() === "ELLISDON" || res.toUpperCase() === "ED") {
@@ -41,29 +35,6 @@ class SignUp extends React.Component {
       return false;
     }
     return true;
-  }
-
-  validateSignUpPart1 = () => {
-    this.setState({
-      firstName: document.getElementById("firstName").value,
-      lastName: document.getElementById("lastName").value,
-      email: document.getElementById("email").value,
-      company: document.getElementById("company").value,
-      role: document.getElementById("role").value
-    });
-    return this.validateEmail(document.getElementById("email").value);
-  }
-
-  validateSignUpPart2 = () => {
-    if(document.getElementById("newPass").value === document.getElementById("confirmedPass").value) {
-      this.setState({
-        password: document.getElementById("newPass").value,
-        confirmedPassword: document.getElementById("confirmedPass").value,
-        projects: document.getElementById("projects").value
-      });
-      return true;
-    }
-    return false;
   }
 
   handleNext = () => {
@@ -139,7 +110,7 @@ class SignUp extends React.Component {
   }
 
   onProjectBlur = () => {
-    let project = document.getElementById("projects").value;
+    let project = this.props.form.get('projects');
     if(project === "New Project") {
       this.openDrawer(true);
     } else {
@@ -148,25 +119,30 @@ class SignUp extends React.Component {
   }
 
   onProjectFocus = () => {
-    let project = document.getElementById("projects").value;
+    let project = this.props.form.get('projects');
     if(project === "New Project") {
       this.openDrawer(true);
     }
   }
 
   onChange = (key) => (e) => {
-    this.setState({[key]: e.target.value});
+    this.props.formActions.setFormByValue(key, e.target.value);
   }
 
   handleSelectDropdown = (key, value) => {
-    this.setState({[key]: value});
+    this.props.formActions.setFormByValue(key, value).then(res => {
+      if(res === "New Project") {
+        this.openDrawer(true);
+      }
+    });
   }
 
   render() {
+    let {form} = this.props;
     let {stage} = this.state;
     let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
     let stage4_text = "Thank you! You can always customize your dashboard later, but for now click below to get started, or go back if you change your mind.";
-    
+
     return (
       <Container className="login">
         {this.state.stage === 1 ?
@@ -176,29 +152,29 @@ class SignUp extends React.Component {
             <input className="login__input login__input--small login__input--left" 
               placeholder="first name" id="firstName" key='firstName' 
               onChange={this.onChange('firstName')}
-              value={this.state.firstName}
+              value={form.get('firstName')}
             />
             <input className="login__input login__input--small login__input--right" 
               placeholder="last name" id="lastName" key='lastName' 
               onChange={this.onChange('lastName')}
-              value={this.state.lastName}
+              value={form.get('lastName')}
             />
             <input className="login__input" 
-              placeholder="email" ref={r => this.email = r} id="email" key='email'
-              onChange={this.onChange('email')}
-              value={this.state.email}
+              placeholder="email" id="email" key='email'
+              onChange={this.onChange('newEmail')}
+              value={form.get('newEmail')}
             /><br/>
             <input className="login__input" 
               placeholder="company" ref={r => this.company = r} id="company" key='company' 
               onChange={this.onChange('company')}
-              value={this.state.company}
+              value={form.get('company')}
             /><br/>
             <InputBox
               id="role"
               placeholder="role"
               onChange={this.onChange('role')}
               handleSelect={this.handleSelectDropdown}
-              value={this.state.role}
+              value={form.get('role')}
               dropdownTitle="Please select a role."
               listItems={[{title:'Project Manager'}, {title:'Subcontractor'}, {title:'Consultant'}, {title:'Owner'}, {title:'Other'}]}
             />
@@ -213,9 +189,8 @@ class SignUp extends React.Component {
               dropdownTitle="Please select all that apply."
               onChange={this.onChange('projects')}
               handleSelect={this.handleSelectDropdown}
-              value={this.state.projects}
-              listItems={
-              this.state.role === "Project Manager" ?
+              value={form.get('projects')}
+              listItems={form.get('role') === "Project Manager" ?
                 [{title:'New Project', closeOnSelect: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
                 [{title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}]
               }
@@ -235,19 +210,19 @@ class SignUp extends React.Component {
               placeholder="new password" 
               onChange={this.onChange('newPass')}
               onFocus={() => this.openDrawer(false)}
-              value={this.state.newPass}
+              value={form.get('newPass')}
             />
             <PasswordInput 
               id="confirmedPass"
               placeholder="confirm password" 
               onChange={this.onChange('confirmedPass')}
               onFocus={() => this.openDrawer(false)}
-              value={this.state.confirmedPass}
+              value={form.get('confirmedPass')}
             />
           </div>  
         : 
           <div>
-            {this.renderHeader(`Hi ${this.state.firstName}!`)}
+            {this.renderHeader(`Hi ${form.get('firstName')}!`)}
             {this.state.stage === 3 ? 
               <div>
                 <p className="login__getstarted__text login__getstarted__text--small-bm">{stage3_text}</p>
@@ -290,7 +265,7 @@ class SignUp extends React.Component {
           <Modal 
             className="login__modal"
             title="OOPS..."
-            content={`Hi ${this.state.firstName}! If you are an EllisDon employee, you already have your login credentials.`}
+            content={`Hi ${form.get('firstName')}! If you are an EllisDon employee, you already have your login credentials.`}
             footer={(<p>Please <Link to="/Login" className="login__modal--hyperlink">click here</Link> to go back to the Login page.</p>)}
             closeModal={this.closeModal}
           />  
@@ -300,4 +275,15 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default connect(
+  state => {
+    return {
+      form: state.form
+    }
+  },
+  dispatch => {
+    return {
+      formActions: bindActionCreators(formActions, dispatch)
+    }
+  }
+)(SignUp);
