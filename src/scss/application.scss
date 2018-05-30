@@ -84,14 +84,17 @@ body {
   &__backdrop {
     height: 100%;
     width: 100%;
-    position: relative;
+    // position: relative;
+    position: absolute;
+    top: 0;
   }
   
   &__content {
     height: 100%;
     width: 100%;
-    position: absolute;
-    top: 0;
+    background-color: $pink;
+    // position: absolute;
+    // top: 0;
   }
 }
 

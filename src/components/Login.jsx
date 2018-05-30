@@ -64,76 +64,105 @@ class Login extends React.Component {
     let {form} = this.props;
     
     return (
-      <Container className="login">
+      <div className="container">
+        <div className="row">
 
-        {this.state.resetPassword ? 
-          <div>
-            <div className="login__header">
-              <h1 className="login__text">Forgot Password?</h1>
+          <div className="two columns" style={{background: 'red', height: '100px'}}></div>
+
+          <div className="five columns">
+            <div className="login__content">
+              
+            <div className="row">
+              <div className="twelve columns" style={{background: 'blue', height: '100px'}}>
+
+                  <div class="row">
+                    <div class="twelve columns">
+                      <input class="u-full-width" type="text" placeholder="username" id="username" />
+                    </div>
+                    <div class="twelve columns">
+                      <input class="u-full-width" type="password" placeholder="password" id="password" />
+                    </div>
+                  </div>
+
+              </div>
             </div>
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      // <Container className="login">
+
+      //   {this.state.resetPassword ? 
+      //     <div>
+      //       <div className="login__header">
+      //         <h1 className="login__text">Forgot Password?</h1>
+      //       </div>
             
-            {!this.state.resetSuccess ? 
-              <div>
-                <p className="login__sub-header-text">Write your email in the box below and we will email you a link to reset your password.</p>
-                <input 
-                  className="login__input"
-                  placeholder="email"
-                  onChange={this.onChange('email')}
-                  value={form.get('email')}
-                /><br/>
+      //       {!this.state.resetSuccess ? 
+      //         <div>
+      //           <p className="login__sub-header-text">Write your email in the box below and we will email you a link to reset your password.</p>
+      //           <input 
+      //             className="login__input"
+      //             placeholder="email"
+      //             onChange={this.onChange('email')}
+      //             value={form.get('email')}
+      //           /><br/>
                 
-                <div className="login__button-container">
-                  <img className="login__arrow" src={arrow} onClick={this.goBack}/>
-                  <button className="login__button login__button--spec">
-                    <div className="login__button--text" onClick={this.handleReset}>Reset</div>
-                  </button>
-                </div>
-              </div>
-            :
-              <div>
-                <p className="login__sub-header-text">The reset link has been set! Please check your email.</p>
-                <img className="login__checkmark" src={checkmark} onClick={this.backToLogin}/>
-              </div>
-            }
+      //           <div className="login__button-container">
+      //             <img className="login__arrow" src={arrow} onClick={this.goBack}/>
+      //             <button className="login__button login__button--spec">
+      //               <div className="login__button--text" onClick={this.handleReset}>Reset</div>
+      //             </button>
+      //           </div>
+      //         </div>
+      //       :
+      //         <div>
+      //           <p className="login__sub-header-text">The reset link has been set! Please check your email.</p>
+      //           <img className="login__checkmark" src={checkmark} onClick={this.backToLogin}/>
+      //         </div>
+      //       }
 
 
-          </div>
-        : 
-          <div>
-            <div className="login__header">
-              <h1 className="login__text">Login</h1>
-            </div>
-            <input
-              className="login__input"
-              placeholder="username"
-              onChange={this.onChange('userName')}
-              value={form.get('userName')}
-            /><br/>
-            <PasswordInput 
-              onChange={this.onChange('password')}
-              value={form.get('password')}
-            />
+      //     </div>
+      //   : 
+      //     <div>
+      //       <div className="login__header">
+      //         <h1 className="login__text">Login</h1>
+      //       </div>
+      //       <input
+      //         className="login__input"
+      //         placeholder="username"
+      //         onChange={this.onChange('userName')}
+      //         value={form.get('userName')}
+      //       /><br/>
+      //       <PasswordInput 
+      //         onChange={this.onChange('password')}
+      //         value={form.get('password')}
+      //       />
 
-            <div className="login__forgot-pass" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.resetPassword}>
-              <svg height="20" width="20">
-                <circle cx="10" cy="11" r="4" className={cx({
-                  "login__forgot-pass--circle": !this.state.hover,
-                  "login__forgot-pass--solid": this.state.hover
-                })}/>
-              </svg>
-              <p className="login__bottom-text login__forgot-pass--text">Forgot Password?</p>
-            </div>
-            <br/>
+      //       <div className="login__forgot-pass" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onClick={this.resetPassword}>
+      //         <svg height="20" width="20">
+      //           <circle cx="10" cy="11" r="4" className={cx({
+      //             "login__forgot-pass--circle": !this.state.hover,
+      //             "login__forgot-pass--solid": this.state.hover
+      //           })}/>
+      //         </svg>
+      //         <p className="login__bottom-text login__forgot-pass--text">Forgot Password?</p>
+      //       </div>
+      //       <br/>
 
-            <button className="login__button" onClick={this.handleSubmit}>
-              <div className="login__button--text">Enter</div>
-            </button>
-            <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
-          </div>
-        }
+      //       <button className="login__button" onClick={this.handleSubmit}>
+      //         <div className="login__button--text">Enter</div>
+      //       </button>
+      //       <p className="login__bottom-text">If you are new to Gate Three, please <Link to="/SignUp" className="login__bottom-text--hyperlink">click here</Link> to sign up</p>
+      //     </div>
+      //   }
 
 
-      </Container>
+      // </Container>
     );
   }
 }

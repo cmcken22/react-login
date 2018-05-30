@@ -89,7 +89,7 @@ class App extends React.Component {
       <Router>
         <div className={`main theme-${this.state.currentCity}`}>
           
-          {this.state.currentCity === 'toronto' ? 
+          {/* {this.state.currentCity === 'toronto' ? 
             <Toronto/>
           : this.state.currentCity === 'ottawa' ? 
             <Ottawa/>
@@ -97,7 +97,7 @@ class App extends React.Component {
             <Edmonton/>
           : this.state.currentCity === 'vancouver' ? 
             <Vancouver/>
-          : null}
+          : null} */}
 
           <div className="main__content">
             <Switch>
