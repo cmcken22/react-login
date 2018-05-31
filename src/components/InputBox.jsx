@@ -8,6 +8,7 @@ class InputBox extends React.Component {
     super(props);
     this.state = {
       dropdownActive: false,
+      openDrawer: false,
       dropdownPos: {
         top: 0,
         left: 0
@@ -39,12 +40,9 @@ class InputBox extends React.Component {
   }
 
   handleSelect = (item) => {
-    this.input.value = item.title;
-    if(item.closeOnSelect) {
-      this.setState({dropdownActive: false});
-    }
+    if(item.openDrawer) this.setState({openDrawer: true});
+    if(item.closeOnSelect) this.setState({dropdownActive: false});
     if(this.props.handleSelect) this.props.handleSelect(this.props.id, item.title);
-    if(this.props.onBlur) this.props.onBlur();
     this.input.focus();
   }
 
@@ -56,42 +54,50 @@ class InputBox extends React.Component {
     if(this.props.onChange) this.props.onChange(e);
   }
 
+  openDrawer = (value) => {
+    this.setState({openDrawer: value});
+  }
+
   render() {
     let {id, placeholder} = this.props;
-
+    
     return (
-      <div 
-        ref={r => this.containerRef = r}
-        className={cx("inputbox__container", {
-          [this.props.classname]: this.props.classname
-        })} 
-      >
-        <div className="inputbox__inner">
-          <input 
-            id={id || placeholder}
-            placeholder={placeholder}
-            className="inputbox__input"
-            ref={r => this.input = r}
-            onFocus={this.onFocus}
-            onBlur={this.props.onBlur}
-            onChange={this.preOnChange}
-            value={this.props.value}
-          />
-          <svg className="inputbox__svg" height="20" width="22" onClick={this.handleClick}>
-            {this.renderPoly(!this.state.dropdownActive)}
-          </svg>
+      <div className="inputbox__outer-container">
+        <div 
+          ref={r => this.containerRef = r}
+          className={cx("inputbox__container", {
+            [this.props.classname]: this.props.classname,
+            "inputbox__container--bottom-pad": !this.state.openDrawer
+          })} 
+        >
+          <div className="inputbox__inner">
+            <input 
+              id={id || placeholder}
+              placeholder={placeholder}
+              className="inputbox__input"
+              ref={r => this.input = r}
+              onFocus={this.onFocus}
+              onBlur={this.props.onBlur}
+              onChange={this.preOnChange}
+              value={this.props.value}
+            />
+            <svg className="inputbox__svg" height="20" width="22" onClick={this.handleClick}>
+              {this.renderPoly(!this.state.dropdownActive)}
+            </svg>
 
-          {this.state.dropdownActive ?
-            <div className="inputbox__dropdown" style={this.state.dropdownPos}>
-              <Dropdown
-                title={this.props.dropdownTitle}
-                listItems={this.props.listItems}
-                onSelect={this.handleSelect}
-              />
-            </div>
-          : null}
+            {this.state.dropdownActive ?
+              <div className="inputbox__dropdown" style={this.state.dropdownPos}>
+                <Dropdown
+                  title={this.props.dropdownTitle}
+                  listItems={this.props.listItems}
+                  onSelect={this.handleSelect}
+                  />
+              </div>
+            : null}
 
+          </div>
         </div>
+        {this.state.openDrawer ? this.props.drawer : null}
       </div>
     );
   }

@@ -15,11 +15,11 @@ class SignUp extends React.Component {
   
   constructor(props) {
     super(props);
+    this.drawer = React.createRef();
     this.state = {
       stage: 1,
       displayModal: false,
       displayPreview: false,
-      drawerOpen: false
     }
   }
 
@@ -105,36 +105,22 @@ class SignUp extends React.Component {
     this.setState({displayPreview: !this.state.displayPreview});
   }
 
-  openDrawer = (value) => {
-    this.setState({drawerOpen: value});
-  }
-
-  onProjectBlur = () => {
-    let project = this.props.form.get('projects');
-    if(project === "New Project") {
-      this.openDrawer(true);
-    } else {
-      this.openDrawer(false);
-    }
-  }
-
-  onProjectFocus = () => {
-    let project = this.props.form.get('projects');
-    if(project === "New Project") {
-      this.openDrawer(true);
-    }
-  }
-
   onChange = (key) => (e) => {
     this.props.formActions.setFormByValue(key, e.target.value);
   }
 
   handleSelectDropdown = (key, value) => {
-    this.props.formActions.setFormByValue(key, value).then(res => {
-      if(res === "New Project") {
-        this.openDrawer(true);
-      }
-    });
+    this.props.formActions.setFormByValue(key, value);
+  }
+
+  openDrawer = (value) => {
+    this.drawer.current.openDrawer(value);
+  } 
+
+  onProjectFocus = () => {
+    if(this.props.form.get('projects') === 'New Project') {
+      this.openDrawer(true);
+    }
   }
 
   render() {
@@ -191,20 +177,20 @@ class SignUp extends React.Component {
               handleSelect={this.handleSelectDropdown}
               value={form.get('projects')}
               listItems={form.get('role') === "Project Manager" ?
-                [{title:'New Project', closeOnSelect: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
+                [{title:'New Project', closeOnSelect: true, openDrawer: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
                 [{title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}]
               }
-              onBlur={this.onProjectBlur}
+              ref={this.drawer}
               onFocus={this.onProjectFocus}
+              drawer={(
+                <div className="login__drawer">
+                  <input className="login__drawer__item" placeholder="project name"/>
+                  <input className="login__drawer__item" placeholder="project #"/>
+                  <input className="login__drawer__item" placeholder="project region"/>
+                  <input className="login__drawer__item" placeholder="project type" onBlur={() => this.openDrawer(false)}/>
+                </div>
+              )}
             />
-            {this.state.drawerOpen ? 
-              <div className="login__drawer">
-                <input className="login__drawer__item" placeholder="project name"/>
-                <input className="login__drawer__item" placeholder="project #"/>
-                <input className="login__drawer__item" placeholder="project region"/>
-                <input className="login__drawer__item" placeholder="project type" onBlur={() => this.openDrawer(false)}/>
-              </div>
-            : null}
             <PasswordInput 
               id="newPass"
               placeholder="new password" 
