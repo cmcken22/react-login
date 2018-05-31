@@ -39,7 +39,7 @@ class InputBox extends React.Component {
     });
   }
 
-  handleSelect = (item) => {
+  handleSelect = (item, removeItem) => {
     if(item.openDrawer) {
       this.setState({openDrawer: true});
       this.input.focus();
@@ -49,7 +49,7 @@ class InputBox extends React.Component {
     if(item.closeOnSelect || this.props.closeDropdownOnSelect) this.setState({dropdownActive: false});
     if(this.props.handleSelect) {
       if(this.props.clearDrawer) this.props.clearDrawer();
-      this.props.handleSelect(this.props.id, item.title);
+      this.props.handleSelect(this.props.id, item.title, removeItem);
     }
   }
 
@@ -98,7 +98,8 @@ class InputBox extends React.Component {
                   title={this.props.dropdownTitle}
                   listItems={this.props.listItems}
                   onSelect={this.handleSelect}
-                  />
+                  selectMultiple={this.props.selectMultiple}
+                />
               </div>
             : null}
 

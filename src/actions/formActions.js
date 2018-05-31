@@ -3,6 +3,8 @@ import Actions from './Actions';
 export const SET_FORM_VALUE = 'SET_FORM_VALUE';
 export const FORM_SET_IN = 'FORM_SET_IN';
 export const CLEAR_NEW_PROJECT = 'CLEAR_NEW_PROJECT';
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 
 export const setFormByValue = (key, value) => (dispatch, getState) => {
   return new Promise(function(resolve, reject) {
@@ -26,8 +28,17 @@ export const formSetIn = Actions.creator(
 )
 
 export const clearNewProject = Actions.creator(
-  CLEAR_NEW_PROJECT,
-  // (type, keys, value) => Actions.createAction(type, {keys, value})
+  CLEAR_NEW_PROJECT
+)
+
+export const addProject = Actions.creator(
+  ADD_PROJECT,
+  (type, key, value) => Actions.createAction(type, {key, value})
+)
+
+export const removeProject = Actions.creator(
+  REMOVE_PROJECT,
+  (type, key, value) => Actions.createAction(type, {key, value})
 )
 
 // export const commonImmutableActions = Actions.commonImmutable('form')

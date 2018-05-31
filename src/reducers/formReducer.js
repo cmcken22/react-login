@@ -13,7 +13,7 @@ const defaultState = fromJS({
   role: "",
   password: "",
   confirmedPassword: "",
-  projects: "",
+  projects: {},
   newProject: {
     name: "",
     number: "",
@@ -34,13 +34,31 @@ export const reducer = handleActions({
     return state.set(action.payload.key, action.payload.value);
   },
 
-  [formActions.clearNewProject]: (state, actions) => {
+  [formActions.clearNewProject]: (state, action) => {
     return state.set('newProject', Map({
       name: "", 
       number: "",
       region: "",
       type: ""
     }));
+  },
+
+  [formActions.addProject]: (state, action) => {
+    if(state.get('projects') === 'New Project') {
+      return state.set('projects', [action.payload.value]);
+    } else {
+      return state.set('projects', [...state.get('projects'), action.payload.value]);
+    }
+  },
+
+  [formActions.removeProject]: (state, action) => {
+    let tempArray = state.get('projects');
+    let index = tempArray.indexOf(action.payload.value);
+    if(index === -1) {
+      return state;
+    }
+    tempArray.splice(index, 1);
+    return state.set('projects', tempArray);
   }
   
 }, defaultState)

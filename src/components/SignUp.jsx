@@ -109,6 +109,19 @@ class SignUp extends React.Component {
     this.props.formActions.setFormByValue(key, e.target.value);
   }
 
+  handleSelectMultipleDropdown = (key, value, removeItem) => {
+    if(removeItem) {
+      this.props.formActions.removeProject(key, value);
+    } else {
+      console.log(key, value);
+      if(value === 'New Project') {
+        this.handleSelectDropdown(key, value);
+      } else {
+        this.props.formActions.addProject(key, value);
+      }
+    }
+  }
+
   handleSelectDropdown = (key, value) => {
     this.props.formActions.setFormByValue(key, value);
   }
@@ -118,6 +131,7 @@ class SignUp extends React.Component {
   } 
 
   onProjectFocus = () => {
+    console.log('onProjectFocus', this.props.form.get('projects'));
     if(this.props.form.get('projects') === 'New Project') {
       this.openDrawer(true);
     }
@@ -168,7 +182,7 @@ class SignUp extends React.Component {
     let {stage} = this.state;
     let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
     let stage4_text = "Thank you! You can always customize your dashboard later, but for now click below to get started, or go back if you change your mind.";
-
+    
     return (
       <Container className="login">
         {this.state.stage === 1 ?
@@ -215,8 +229,11 @@ class SignUp extends React.Component {
               placeholder="projects"
               dropdownTitle="Please select all that apply."
               onChange={form.getIn(['newProject', 'name']) !== '' ? this.setNewProjectValue('name') : this.onChange('projects')}
-              handleSelect={this.handleSelectDropdown}
-              value={form.getIn(['newProject', 'name']) !== '' ? form.getIn(['newProject', 'name']) : form.get('projects')}
+              handleSelect={this.handleSelectMultipleDropdown}
+              value={form.getIn(['newProject', 'name']) !== '' ? form.getIn(['newProject', 'name']) : 
+                form.get('projects').size !== 0 ? form.get('projects') : ""
+              }
+              selectMultiple={true}
               listItems={form.get('role') === "Project Manager" ?
                 [{title:'New Project', closeOnSelect: true, openDrawer: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
                 [{title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}]
