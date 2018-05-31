@@ -123,6 +123,46 @@ class SignUp extends React.Component {
     }
   }
 
+  setNewProjectValue = (key) => (e) => {
+    this.props.formActions.formSetIn(['newProject', key], e.target.value);
+  }
+
+  clearDrawer = () => {
+    this.props.formActions.clearNewProject();
+  }
+
+  renderDrawer = () => {
+    return (
+      <div className="login__drawer">
+        <input 
+          className="login__drawer__item"
+          placeholder="project name"
+          onChange={this.setNewProjectValue('name')}
+          value={this.props.form.getIn(['newProject', 'name'])}
+        />
+        <input
+          className="login__drawer__item"
+          placeholder="project #"
+          onChange={this.setNewProjectValue('number')}
+          value={this.props.form.getIn(['newProject', 'number'])}
+        />
+        <input
+          className="login__drawer__item"
+          placeholder="project region"
+          onChange={this.setNewProjectValue('region')}
+          value={this.props.form.getIn(['newProject', 'region'])}
+        />
+        <input
+          className="login__drawer__item"
+          placeholder="project type"
+          onChange={this.setNewProjectValue('type')}
+          value={this.props.form.getIn(['newProject', 'type'])} 
+          onBlur={() => this.openDrawer(false)}
+        />
+      </div>
+    )
+  }
+
   render() {
     let {form} = this.props;
     let {stage} = this.state;
@@ -160,6 +200,7 @@ class SignUp extends React.Component {
               placeholder="role"
               onChange={this.onChange('role')}
               handleSelect={this.handleSelectDropdown}
+              closeDropdownOnSelect={true}
               value={form.get('role')}
               dropdownTitle="Please select a role."
               listItems={[{title:'Project Manager'}, {title:'Subcontractor'}, {title:'Consultant'}, {title:'Owner'}, {title:'Other'}]}
@@ -173,23 +214,17 @@ class SignUp extends React.Component {
               id="projects"
               placeholder="projects"
               dropdownTitle="Please select all that apply."
-              onChange={this.onChange('projects')}
+              onChange={form.getIn(['newProject', 'name']) !== '' ? this.setNewProjectValue('name') : this.onChange('projects')}
               handleSelect={this.handleSelectDropdown}
-              value={form.get('projects')}
+              value={form.getIn(['newProject', 'name']) !== '' ? form.getIn(['newProject', 'name']) : form.get('projects')}
               listItems={form.get('role') === "Project Manager" ?
                 [{title:'New Project', closeOnSelect: true, openDrawer: true}, {title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}] :
                 [{title:'Project 1'}, {title:'Project 2'}, {title:'Project 3'}, {title:'Project 4'}, {title:'Project 5'}]
               }
               ref={this.drawer}
               onFocus={this.onProjectFocus}
-              drawer={(
-                <div className="login__drawer">
-                  <input className="login__drawer__item" placeholder="project name"/>
-                  <input className="login__drawer__item" placeholder="project #"/>
-                  <input className="login__drawer__item" placeholder="project region"/>
-                  <input className="login__drawer__item" placeholder="project type" onBlur={() => this.openDrawer(false)}/>
-                </div>
-              )}
+              drawer={this.renderDrawer()}
+              clearDrawer={this.clearDrawer}
             />
             <PasswordInput 
               id="newPass"

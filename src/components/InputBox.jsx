@@ -40,10 +40,17 @@ class InputBox extends React.Component {
   }
 
   handleSelect = (item) => {
-    if(item.openDrawer) this.setState({openDrawer: true});
-    if(item.closeOnSelect) this.setState({dropdownActive: false});
-    if(this.props.handleSelect) this.props.handleSelect(this.props.id, item.title);
-    this.input.focus();
+    if(item.openDrawer) {
+      this.setState({openDrawer: true});
+      this.input.focus();
+    } else {
+      this.setState({openDrawer: false});
+    }
+    if(item.closeOnSelect || this.props.closeDropdownOnSelect) this.setState({dropdownActive: false});
+    if(this.props.handleSelect) {
+      if(this.props.clearDrawer) this.props.clearDrawer();
+      this.props.handleSelect(this.props.id, item.title);
+    }
   }
 
   onFocus = () => {
@@ -60,7 +67,7 @@ class InputBox extends React.Component {
 
   render() {
     let {id, placeholder} = this.props;
-    
+
     return (
       <div className="inputbox__outer-container">
         <div 
