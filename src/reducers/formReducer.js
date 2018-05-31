@@ -44,7 +44,7 @@ export const reducer = handleActions({
   },
 
   [formActions.addProject]: (state, action) => {
-    if(state.get('projects') === 'New Project') {
+    if(typeof state.get('projects') === 'string') {
       return state.set('projects', [action.payload.value]);
     } else {
       return state.set('projects', [...state.get('projects'), action.payload.value]);
