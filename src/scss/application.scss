@@ -9,18 +9,13 @@ $font-size: 1.2vw;
 $input-height: 5.83%;
 $button-height: 4.76%;
 
-//set to Toronto by default
-$theme-background: #7CCED0;
-$theme-shadow: #42a5a5;
-$theme-button: #F9A87A;
-$theme-button-shadow: #F26722;
-
 $themes: (
   toronto: (
     backgroundColor: #7CCED0,
     shadow: #42a5a5,
     button: #F9A87A,
     buttonShadow: #F26722,
+    buttonTextColor: white,
     hyperlink: #262262
   ),
   ottawa: (
@@ -28,6 +23,7 @@ $themes: (
     shadow: #CE5D6D,
     button: #AFD9AB,
     buttonShadow: #61B258,
+    buttonTextColor: white,
     hyperlink: #CE4A52
   ),
   edmonton: (
@@ -35,6 +31,7 @@ $themes: (
     shadow: #8D58A4,
     button: #F5F087,
     buttonShadow: #A79733,
+    buttonTextColor: black,
     hyperlink: #70439A
   ),
   vancouver: (
@@ -42,6 +39,7 @@ $themes: (
     shadow: #569B78,
     button: #DBB3AD,
     buttonShadow: #A5706A,
+    buttonTextColor: white,
     hyperlink: #3B8E68
   ),
 );
@@ -136,7 +134,6 @@ body {
       height: 6vw;
       animation-delay: -1s;
       animation: move-cloud-1 60s infinite;
-      // background-color: $blue;
     }
     &--2 {
       background-image: url('../assets/clouds/DoubleCloud-05.png');
@@ -145,7 +142,6 @@ body {
       height: 9vw;
       animation-delay: -2s;
       animation: move-cloud-2 120s infinite;
-      // background-color: $pink;
     }
     &--3 {
       background-image: url('../assets/clouds/BigSingleCloud-07.png');
@@ -154,8 +150,6 @@ body {
       height: 8vw;
       animation-delay: -3s;
       animation: move-cloud-3 50s infinite;
-      // background-color: blue;
-      // left: 64%;
     }
   } 
 }
@@ -194,6 +188,41 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
+
+  &__planes {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    // background-color: red;
+    position: relative;
+  }
+  &__plane {
+    // background-color: $blue;
+    background-image: url("../assets/plane.png"); 
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 8vw;
+    width: 24vw;
+    position: relative;
+    animation-delay: -1s;
+    animation: move-plane 30s infinite;
+  }
+}
+
+@keyframes move-plane {
+  0% {
+    top: 50%;
+    left: -24vw;
+  }
+  100% {
+    top: 0%;
+    left: calc(100% + 24vw);
+    height: 3vw;
+    width: 9vw;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    -webkit-transform: rotate(20deg); /* Safari 3-8 */
+    transform: rotate(20deg);
+  }
 }
 
 .vancouver {
@@ -211,6 +240,12 @@ body {
     background-image: url("../assets/skylines/vancouver.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+
+  &__birds {
+    // background-color: $pink;
+    height: 100%;
+    width: 100%;
   }
 }
 

@@ -12,10 +12,8 @@ class Vancouver extends React.Component {
   render() {
     return (
       <div className="main__backdrop vancouver">
-        <div className="toronto__clouds">
-          <div className="toronto__cloud toronto__cloud--1"></div><br/>
-          <div className="toronto__cloud toronto__cloud--2"></div><br/>
-          <div className="toronto__cloud toronto__cloud--3"></div>
+        <div className="vancouver__birds">
+        
         </div>
         <div className="vancouver__backdrop">
         </div>

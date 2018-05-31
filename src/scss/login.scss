@@ -157,7 +157,9 @@
     &--text {
       font-family: moonBold;
       font-size: 1.2vw;
-      color: white;
+      @include themify($themes) {
+        color: themed('buttonTextColor');
+      }
       // padding: 0 15%;
       white-space: nowrap;
     }

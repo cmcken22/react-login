@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import plane from './../../assets/plane.png';
 
 class Edmonton extends React.Component {
   
@@ -12,12 +13,10 @@ class Edmonton extends React.Component {
   render() {
     return (
       <div className="main__backdrop edmonton">
-        <div className="toronto__clouds">
-          <div className="toronto__cloud toronto__cloud--1"></div><br/>
-          <div className="toronto__cloud toronto__cloud--2"></div><br/>
-          <div className="toronto__cloud toronto__cloud--3"></div>
-        </div>
         <div className="edmonton__backdrop">
+        </div>
+        <div className="edmonton__planes">
+          <div className="edmonton__plane"></div>
         </div>
       </div>
     );
