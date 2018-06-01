@@ -69,9 +69,9 @@ class App extends React.Component {
     })
     let closestCity = cities[0];
     this.setState({currentCity: closestCity.name});
-    this.setState({currentCity: 'ottawa'});
-    this.setState({currentCity: 'edmonton'});
-    this.setState({currentCity: 'vancouver'});
+    // this.setState({currentCity: 'ottawa'});
+    // this.setState({currentCity: 'edmonton'});
+    // this.setState({currentCity: 'vancouver'});
   }
 
   geoLocationError = (error) => {
