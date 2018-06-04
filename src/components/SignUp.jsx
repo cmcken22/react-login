@@ -20,36 +20,44 @@ class SignUp extends React.Component {
       stage: 1,
       displayModal: false,
       displayPreview: false,
+      displayInvalidEmailModal: false
     }
   }
 
-  handleSubmit = () => {
-  }
-
-  validateEmail = (userEmail) => {
-    let email = userEmail || document.getElementById("email").value;
+  validateEmail = () => {
+    let email = this.props.form.get('newEmail');
     if(email === "") return true;
-    var res = email.split("@")[1].split(".")[0];
-    if(res.toUpperCase() === "ELLISDON" || res.toUpperCase() === "ED") {
-      this.setState({displayModal: true});
+    try {
+      let domainName = email.split("@")[1].split(".")[0];
+      let domainExtension = email.split("@")[1].split(".")[1]
+      if(domainName.toUpperCase() === "ELLISDON" || domainName.toUpperCase() === "ED") {
+        this.setState({displayModal: true});
+        return false;
+      } else if(!domainExtension) {
+        throw 'invalid or no domain extension provided';
+      }
+     }
+     catch(err) {
+      console.log(err);
+      this.setState({displayInvalidEmailModal: true});
       return false;
     }
     return true;
   }
 
   handleNext = () => {
-    // let valid = false;
-    // if(this.state.stage === 1) {
-    //   valid = this.validateSignUpPart1();
-    // } else if(this.state.stage === 2) {
-    //   this.validateSignUpPart2();
-    //   valid = true;
-    // } else {
-    //   valid = true;
-    // }
-    // if(valid) {
+    let valid = false;
+    if(this.state.stage === 1) {
+      valid = this.validateEmail();
+    } else if(this.state.stage === 2) {
+      // this.validateSignUpPart2();
+      valid = true;
+    } else {
+      valid = true;
+    }
+    if(valid) {
       this.setState({stage: this.state.stage+1});
-    // }
+    }
   }
 
   handleStepClick = (index) => {
@@ -88,6 +96,7 @@ class SignUp extends React.Component {
 
   closeModal = () => {
     this.setState({displayModal: false});
+    this.setState({displayInvalidEmailModal: false});
   }
 
   renderHeader = (title) => {
@@ -131,7 +140,6 @@ class SignUp extends React.Component {
   } 
 
   onProjectFocus = () => {
-    console.log('onProjectFocus', this.props.form.get('projects'));
     if(this.props.form.get('projects') === 'New Project') {
       this.openDrawer(true);
     }
@@ -179,7 +187,6 @@ class SignUp extends React.Component {
 
   render() {
     let {form} = this.props;
-    let {stage} = this.state;
     let stage3_text = "One last thing before we log you in. We would like to know if you want to customize your dashboard or if you would like to use our existing template?";
     let stage4_text = "Thank you! You can always customize your dashboard later, but for now click below to get started, or go back if you change your mind.";
     
@@ -199,10 +206,11 @@ class SignUp extends React.Component {
               onChange={this.onChange('lastName')}
               value={form.get('lastName')}
             />
-            <input className="login__input" 
+            <input className="login__input"
               placeholder="email" id="email" key='email'
               onChange={this.onChange('newEmail')}
               value={form.get('newEmail')}
+              onBlur={this.validateEmail}
             /><br/>
             <input className="login__input" 
               placeholder="company" ref={r => this.company = r} id="company" key='company' 
@@ -279,9 +287,11 @@ class SignUp extends React.Component {
                 <p className="login__getstarted__text">{stage4_text}</p>
                 <div className="login__button-container">
                   <img className="login__arrow" src={arrow} onClick={this.goBack}/>
-                  <button className="login__button" style={{width: '12vw'}}>
-                    <div className="login__button--text">Get Started</div>
-                  </button>
+                  <Link to="/BestPractices">
+                    <button className="login__button" style={{width: '12vw'}}>
+                      <div className="login__button--text">Get Started</div>
+                    </button>
+                  </Link>
                 </div>
               </div>
             }
@@ -300,13 +310,22 @@ class SignUp extends React.Component {
         : null}
 
         {this.state.displayModal ? 
-          <Modal 
+          <Modal
             className="login__modal"
             title="OOPS..."
             content={`Hi ${form.get('firstName')}! If you are an EllisDon employee, you already have your login credentials.`}
             footer={(<p>Please <Link to="/Login" className="login__modal--hyperlink">click here</Link> to go back to the Login page.</p>)}
             closeModal={this.closeModal}
-          />  
+          />
+        : null}
+        {this.state.displayInvalidEmailModal ?
+          <Modal
+            className="login__modal"
+            title="OOPS..."
+            content="Please enter a valid email."
+            footer={null}
+            closeModal={this.closeModal}
+          />
         : null}
       </Container>
     );

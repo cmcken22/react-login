@@ -25,7 +25,7 @@ const defaultState = fromJS({
       name: 'edmonton',
       long: -113.4909,
       lat: 53.5444,
-    },
+    }
   ]
 });
 

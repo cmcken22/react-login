@@ -3,7 +3,6 @@ import cx from 'classnames';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import mainLogo from'../assets/gateThreeLogo.png';
 import arrow from'../assets/arrow.png';
 import checkmark from'../assets/success.svg';
 import Container from'./Container';

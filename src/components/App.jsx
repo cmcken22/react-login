@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import Login from './Login';
 import SignUp from './SignUp';
+import BestPractices from './BestPractices';
 import * as charactersActions from './../actions/charactersActions';
 import * as locationActions from './../actions/locationActions';
 
@@ -62,6 +63,7 @@ class App extends React.Component {
           <Route exact path="/" component={Login} />
           <Route path="/Login" component={Login} />
           <Route path="/SignUp" component={SignUp} />
+          <Route path="/BestPractices" component={BestPractices} />
           <Route component={NotFound} />
         </Switch>
       </Router>
