@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import Dropdown from './Dropdown.jsx';
+import Dropdown from './Dropdown';
 
 class InputBox extends React.Component {
   

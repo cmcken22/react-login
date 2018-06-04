@@ -1,10 +1,10 @@
 import React from 'react';
 import cx from 'classnames';
 import mainLogo from'../assets/gateThreeLogo-white.png';
-import Toronto from './skylines/Toronto.jsx';
-import Ottawa from './skylines/Ottawa.jsx';
-import Edmonton from './skylines/Edmonton.jsx';
-import Vancouver from './skylines/Vancouver.jsx';
+import Toronto from './skylines/Toronto';
+import Ottawa from './skylines/Ottawa';
+import Edmonton from './skylines/Edmonton';
+import Vancouver from './skylines/Vancouver';
 import {connect} from "react-redux";
 // import {bindActionCreators} from "redux/index";
 

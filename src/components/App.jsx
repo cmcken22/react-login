@@ -1,11 +1,10 @@
 import React from 'react';
-import cx from 'classnames';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
+import Login from './Login';
+import SignUp from './SignUp';
 import * as charactersActions from './../actions/charactersActions';
 import * as locationActions from './../actions/locationActions';
 
@@ -34,7 +33,6 @@ class App extends React.Component {
   showPosition = (position) => {
     let {longitude, latitude} = position.coords;
     let distance = 1000000, closestCity = null;
-    console.log(this.props.cities);
     this.props.cities.map(city => {
       let a = city.get('long') - longitude;
       let b = city.get('lat') - latitude;
@@ -77,7 +75,6 @@ export default connect(
   state => {
     return {
       characters: state.characters,
-      location: state.location,
       cities: state.location.get('cities'),
     }
   },

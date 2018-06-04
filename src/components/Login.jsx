@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import mainLogo from'../assets/gateThreeLogo.png';
 import arrow from'../assets/arrow.png';
 import checkmark from'../assets/success.svg';
-import Container from'./Container.jsx';
-import PasswordInput from './PasswordInput.jsx'; 
+import Container from'./Container';
+import PasswordInput from './PasswordInput';
 import * as formActions from './../actions/formActions';
 
 class Login extends React.Component {

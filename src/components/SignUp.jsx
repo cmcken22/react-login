@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cx from 'classnames';
-import InputBox from './InputBox.jsx';
+import InputBox from './InputBox';
 import arrow from'../assets/arrow.png';
-import Container from'./Container.jsx';
-import PasswordInput from './PasswordInput.jsx';
-import Modal from './Modal.jsx';
+import Container from'./Container';
+import PasswordInput from './PasswordInput';
+import Modal from './Modal';
 import * as formActions from './../actions/formActions';
 
 

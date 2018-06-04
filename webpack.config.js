@@ -12,6 +12,9 @@ const config = {
      filename: 'bundle.js',
      path: BUILD_DIR,
    },
+   resolve: {
+     extensions: [".js", ".jsx"]
+   },
    module: {
     rules: [
      {
