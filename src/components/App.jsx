@@ -66,7 +66,7 @@ class App extends React.Component {
       let d1 = Math.sqrt(Math.pow(a.long - longitude, 2) + Math.pow(a.lat - latitude, 2));
       let d2 = Math.sqrt(Math.pow(b.long - longitude, 2) + Math.pow(b.lat - latitude, 2));
       return d1 - d2; 
-    })
+    });
     let closestCity = cities[0];
     this.setState({currentCity: closestCity.name});
     // this.setState({currentCity: 'ottawa'});
@@ -86,15 +86,15 @@ class App extends React.Component {
     
     return (
       <Router>
-        <div className={`main theme-${this.state.currentCity}`}>
+        <div className={`main theme-${currentCity}`}>
           
-          {this.state.currentCity === 'toronto' ? 
+          {currentCity === 'toronto' ?
             <Toronto/>
-          : this.state.currentCity === 'ottawa' ? 
+          : currentCity === 'ottawa' ?
             <Ottawa/>
-          : this.state.currentCity === 'edmonton' ? 
+          : currentCity === 'edmonton' ?
             <Edmonton/>
-          : this.state.currentCity === 'vancouver' ? 
+          : currentCity === 'vancouver' ?
             <Vancouver/>
           : null}
 
